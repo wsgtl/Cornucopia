@@ -111,7 +111,7 @@ export class GameView extends ViewComponent {
 
     fit() {
         const h = view.getVisibleSize().y;
-
+        console.log("高度"+h)
         const cha = h - 1920;
         const ch = cha / 2;
         const cy = (ch < 60 ? ch : ch - 80);

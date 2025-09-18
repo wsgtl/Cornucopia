@@ -58,7 +58,13 @@ export class GoldRewardDialog extends ViewComponent {
 
 
         this.init();
+        this.fit();
     }
+     fit() {
+        const h = view.getVisibleSize().y;
+        const cha= h-1920;
+        this.top.y = 830+cha*0.4;
+     }
 
     init() {
         this.initJackpot();
