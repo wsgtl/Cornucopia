@@ -116,7 +116,7 @@ export class GameView extends ViewComponent {
         const ch = cha / 2;
         const cy = (ch < 60 ? ch : ch - 80);
         this.top.node.y = 960 + cy;
-        this.jackpot.y = 650 + cy * 0.6;
+        this.jackpot.y = 700 + cy * 0.8;
 
         // const kbn = this.content.getChildByName("kbn");
         this.kbn.node.y = 440 + ch * 0.3;
@@ -127,9 +127,9 @@ export class GameView extends ViewComponent {
             // this.boardContent.y=0+30;s
 
         }
-        // this.treasure.node.y = 720 + ch * 1;
-        this.limit.node.y = 540 + ch * 0.5;
-        this.btnMore.y = 540 + ch * 0.5;
+        // this.treasure.node.y = 720 + ch * 1;s
+        this.limit.node.y = 580 + ch * 0.9;
+        this.btnMore.y = 580 + ch * 0.9;
         console.log("h", h);
 
         const bgSc = Math.max(1, 1 + cha / 1200);
@@ -272,7 +272,7 @@ export class GameView extends ViewComponent {
         this.freeGameNode.getChildByName("num").getComponent(NumFont).num = GameManger.instance.freegameTimes-i;
     }
     private showBg(i: number) {
-        this.bg1.active = i == 1;
+        // this.bg1.active = i == 1;
         this.bg2.active = i == 2;
         // this.treasure.node.active = i == 1;
         // this.treasure.node.y = i==1?260:160;

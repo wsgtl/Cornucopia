@@ -98,7 +98,7 @@ export type CoinCashData = {
 
 export namespace GameUtil {
    export const CardW: number = 204;//卡牌宽
-   export const CardH: number = 195;//卡牌高
+   export const CardH: number = 198;//卡牌高
    export const AllRow: number = 3;//行数
    export const AllCol: number = 5;//列数
    export const CreateRow: number = 4;//生成的行数

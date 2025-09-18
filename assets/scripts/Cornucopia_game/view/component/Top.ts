@@ -87,7 +87,7 @@ export class Top extends Component {
         return new Promise<void>(res => {
             const lv = GameStorage.getCurLevel();
             const times = GameStorage.getCurLevelTimes();
-            this.lv.num = "LV_" + lv;
+            this.lv.num = "l_" + lv;
             const all = GameUtil.getLevelTimes(lv);
             if (isAni) {
                 tween(this.progress)
