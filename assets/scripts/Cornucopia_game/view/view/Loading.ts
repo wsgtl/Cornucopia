@@ -11,10 +11,16 @@ import { sys } from 'cc';
 import { game } from 'cc';
 import { Game } from 'cc';
 import { MathUtil } from '../../../Cornucopia_common/utils/MathUtil';
+import { view } from 'cc';
+import { UIUtils } from '../../../Cornucopia_common/utils/UIUtils';
 const { ccclass, property } = _decorator;
 
 @ccclass('Loading')
 export class Loading extends ViewComponent {
+    @property(Node)
+    bg: Node = null;
+    @property(Node)
+    logo: Node = null;
     @property(Progress)
     progress: Progress = null;
     @property(NumFont)
@@ -50,6 +56,14 @@ export class Loading extends ViewComponent {
             adHelper.showInterstitial("回前台显示插屏广告");
             console.log("回前台显示插屏广告");
         })
+    }
+    fit() {
+        const h = view.getVisibleSize().y;
+        if (h > 2390) {
+            UIUtils.setHeight(this.bg, h);
+        }
+        const cha = (h - 1920) / 2;
+        this.logo.y = MathUtil.mm(645 + cha, 645, 790);
     }
 }
 
