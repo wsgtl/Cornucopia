@@ -60,7 +60,7 @@ export class FreeGameEnd extends DialogComponent {
         AudioManager.playEffect("gufen");
         this.isAni = true;
         if (this.bg) ActionEffect.fadeIn(this.bg, 0.3);
-        const waitTimes = [0, 0.2, 0.25, 0.3, 0.3, 0.4, 0.4];//各个动画节点等待出现时机
+        const waitTimes = [0, 0.1, 0.25, 0.3, 0.3, 0.4, 0.4];//各个动画节点等待出现时机
         const bigs = [1.3, 1.2, 1.2, 1.2, 1.3, 1.1, 1.1];//各个动画节点最大
         this.aniNodes.forEach(async (v, i) => {
             v.scale = v3();
@@ -79,7 +79,7 @@ export class FreeGameEnd extends DialogComponent {
         // if (this.isAni) return;
         // this.isAni = true;
         ActionEffect.fadeOut(this.bg, 1);
-        const waitTimes = [0.4, 0.3, 0.25, 0.2, 0, 0];//各个动画节点等待出现时机
+        const waitTimes = [0.4, 0.35,0.25, 0.25, 0.2, 0, 0];//各个动画节点等待出现时机
         this.aniNodes.forEach(async (v, i) => {
             await delay(waitTimes[i]);
             ActionEffect.scale(v, 0.4, 0, 1, "backIn");
