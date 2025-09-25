@@ -1,0 +1,27 @@
+
+long.png
+size: 448,197
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dikuang
+  rotate: true
+  xy: 192, 6
+  size: 189, 141
+  orig: 189, 141
+  offset: 0, 0
+  index: -1
+jinbi
+  rotate: true
+  xy: 335, 41
+  size: 154, 111
+  orig: 221, 111
+  offset: 60, 0
+  index: -1
+long
+  rotate: false
+  xy: 2, 2
+  size: 188, 193
+  orig: 188, 193
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,62 @@
+
+free game.png
+size: 617,400
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+freegame
+  rotate: false
+  xy: 389, 96
+  size: 172, 110
+  orig: 172, 110
+  offset: 0, 0
+  index: -1
+guangxiao
+  rotate: false
+  xy: 2, 4
+  size: 385, 394
+  orig: 436, 450
+  offset: 25, 28
+  index: -1
+jubaopeng
+  rotate: false
+  xy: 389, 208
+  size: 207, 190
+  orig: 207, 190
+  offset: 0, 0
+  index: -1
+xing1
+  rotate: true
+  xy: 563, 97
+  size: 48, 52
+  orig: 54, 60
+  offset: 5, 4
+  index: -1
+xing2
+  rotate: false
+  xy: 564, 63
+  size: 31, 32
+  orig: 36, 40
+  offset: 4, 4
+  index: -1
+xing3
+  rotate: false
+  xy: 489, 16
+  size: 73, 78
+  orig: 80, 89
+  offset: 5, 6
+  index: -1
+xing4
+  rotate: true
+  xy: 389, 2
+  size: 92, 98
+  orig: 100, 112
+  offset: 7, 8
+  index: -1
+xing5
+  rotate: true
+  xy: 563, 147
+  size: 59, 35
+  orig: 70, 39
+  offset: 6, 1
+  index: -1

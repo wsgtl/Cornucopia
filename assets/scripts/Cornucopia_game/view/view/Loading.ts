@@ -13,6 +13,7 @@ import { Game } from 'cc';
 import { MathUtil } from '../../../Cornucopia_common/utils/MathUtil';
 import { view } from 'cc';
 import { UIUtils } from '../../../Cornucopia_common/utils/UIUtils';
+import { v3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Loading')
@@ -56,11 +57,14 @@ export class Loading extends ViewComponent {
             adHelper.showInterstitial("回前台显示插屏广告");
             console.log("回前台显示插屏广告");
         })
+        this.fit();
     }
     fit() {
         const h = view.getVisibleSize().y;
         if (h > 2390) {
-            UIUtils.setHeight(this.bg, h);
+            // UIUtils.setHeight(this.bg, h);
+            const sc = h/2390;
+            this.bg.scale =v3(sc,sc,1); 
         }
         const cha = (h - 1920) / 2;
         this.logo.y = MathUtil.mm(645 + cha, 645, 790);

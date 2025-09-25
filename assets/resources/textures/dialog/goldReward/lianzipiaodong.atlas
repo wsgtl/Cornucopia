@@ -1,0 +1,20 @@
+
+lianzipiaodong.png
+size: 753,436
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+youlianzi
+  rotate: false
+  xy: 378, 2
+  size: 373, 432
+  orig: 377, 435
+  offset: 3, 3
+  index: -1
+zuolianzi
+  rotate: false
+  xy: 2, 2
+  size: 374, 432
+  orig: 377, 435
+  offset: 3, 3
+  index: -1

@@ -307,7 +307,7 @@
       "__expectedType__": "sp.SkeletonData"
     },
     "defaultSkin": "default",
-    "defaultAnimation": "breathe",
+    "defaultAnimation": "",
     "_premultipliedAlpha": true,
     "_timeScale": 1,
     "_preCacheMode": 0,
@@ -406,19 +406,19 @@
         "__expectedType__": "sp.SkeletonData"
       },
       {
-        "__uuid__": "31357d5b-ebbe-48b1-b3a9-f393fe68a387",
+        "__uuid__": "14bddfcb-9b13-481d-9b13-6c17d0d079cb",
         "__expectedType__": "sp.SkeletonData"
       },
       {
-        "__uuid__": "183f11db-a77f-4930-b80a-052782e8b89a",
+        "__uuid__": "e33e22a6-a778-4dbb-a36b-c4c1a54ea184",
         "__expectedType__": "sp.SkeletonData"
       },
       {
-        "__uuid__": "bef60425-9694-4813-8d03-866ba4ec96cd",
+        "__uuid__": "431f4e04-f8a8-4661-ae76-fc20873c4809",
         "__expectedType__": "sp.SkeletonData"
       },
       {
-        "__uuid__": "bb062de1-792e-4e97-8108-2d82064d38c8",
+        "__uuid__": "2af5103f-9f9c-4ef3-9fc2-a64ff1a6f2f9",
         "__expectedType__": "sp.SkeletonData"
       },
       {
@@ -426,7 +426,7 @@
         "__expectedType__": "sp.SkeletonData"
       },
       {
-        "__uuid__": "7421b284-2930-4ea4-846b-0d5e0072513e",
+        "__uuid__": "ace1e34a-556f-4e85-9b0e-840211a28f7e",
         "__expectedType__": "sp.SkeletonData"
       },
       {
@@ -434,7 +434,7 @@
         "__expectedType__": "sp.SkeletonData"
       },
       {
-        "__uuid__": "3ecef765-c8a8-439c-bdea-46db422e4825",
+        "__uuid__": "3c4d0ef5-e607-4e3c-9446-ac672f5d9d9a",
         "__expectedType__": "sp.SkeletonData"
       }
     ],

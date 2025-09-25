@@ -29,6 +29,8 @@ export class GoldRewardDialog extends ViewComponent {
     @property(Node)
     btnClaim: Node = null;
     @property(Node)
+    bg: Node = null;
+    @property(Node)
     yb: Node = null;
     @property(Node)
     ybs: Node = null;
@@ -64,6 +66,11 @@ export class GoldRewardDialog extends ViewComponent {
         const h = view.getVisibleSize().y;
         const cha= h-1920;
         this.top.y = 830+cha*0.4;
+        if(h>2390){
+            const sc = h/2390;
+            this.bg.scale =v3(sc,sc,1);
+        }
+        
      }
 
     init() {

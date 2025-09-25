@@ -39,19 +39,22 @@ export class Card extends Component {
             // this.icon.node.active = false;
             // this.sk.animation = "c"+type;
         // }else{
-            this.icon.spriteFrame = this.sf[type - 1];
-            this.sk.node.active = false;
-            this.icon.node.active = true;
+            // this.icon.spriteFrame = this.sf[type - 1];
+            // this.sk.node.active = false;
+            // this.icon.node.active = true;
         // }
 
         // this.icon.spriteFrame = this.sf[type - 1];
         // this.sk.node.active = false;
         // this.icon.node.active = true;
 
-        // this.sk.skeletonData = this.sks[type - 1];
-        // this.sk.node.active = true;
-        // this.icon.node.active = false;
-        // ActionEffect.skAni(this.sk,"breathe");
+        this.sk.skeletonData = this.sks[type - 1];
+        this.sk.node.active = true;
+        this.icon.node.active = false;
+        ActionEffect.skAni(this.sk,"breathe");
+        if(type>5&&type<10){
+            this.sk.node.y = [-3,-2,-3,0][type-6]-15;
+        }
 
 
     }
@@ -94,7 +97,6 @@ export class Card extends Component {
     }
     /**打铃 */
     async ring(){
-        return
         if(this.type==CardType.freeGame){
             this.sk.findAnimation
             ActionEffect.skAni(this.sk,"ring");
@@ -105,7 +107,6 @@ export class Card extends Component {
     }
     /**弹起 */
     pop(type:CardType){
-        return
         if(this.type==type){
             ActionEffect.skAni(this.sk,"pop");
             return true;
@@ -114,7 +115,6 @@ export class Card extends Component {
     }
     /**弹起 */
     breathe(type:CardType){
-        return
         if(this.type==type){
             ActionEffect.skAni(this.sk,"breathe");
         }

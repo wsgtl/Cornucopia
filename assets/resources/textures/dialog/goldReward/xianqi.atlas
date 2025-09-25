@@ -1,0 +1,20 @@
+
+xianqi.png
+size: 1861,342
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+xianqi
+  rotate: false
+  xy: 2, 77
+  size: 1129, 263
+  orig: 1148, 913
+  offset: 19, 1
+  index: -1
+xianqi2
+  rotate: false
+  xy: 1133, 2
+  size: 726, 338
+  orig: 727, 396
+  offset: 0, 53
+  index: -1

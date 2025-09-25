@@ -170,7 +170,7 @@ export class GameManger {
             let gl = num3 < 3 ? 0.5 : num3 < 5 ? 0.3 : 0.1;
             this.insertCardOne(CardType.freeGame, num3, gl);
         }
-        // this.insertCardOne(CardType.freeGame, 3, 0);//免费游戏必出测试代码
+        this.insertCardOne(CardType.freeGame, 3, 0);//免费游戏必出测试代码
 
         //随机插入普通卡片
         this.randomInsertCards();

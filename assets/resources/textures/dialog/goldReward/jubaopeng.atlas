@@ -1,0 +1,27 @@
+
+jubaopeng.png
+size: 1565,607
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cai
+  rotate: false
+  xy: 2, 2
+  size: 706, 603
+  orig: 706, 603
+  offset: 0, 0
+  index: -1
+lv
+  rotate: true
+  xy: 710, 53
+  size: 552, 430
+  orig: 552, 430
+  offset: 0, 0
+  index: -1
+zi
+  rotate: true
+  xy: 1142, 92
+  size: 513, 421
+  orig: 513, 421
+  offset: 0, 0
+  index: -1

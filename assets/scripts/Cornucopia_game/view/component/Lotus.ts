@@ -53,8 +53,8 @@ export class Lotus extends Component {
                 this.showProgress(true);
                 res();
             }
-            ActionEffect.scaleBigToSmall(this.icon, 1.2, 1, 0.2);
-            // ActionEffect.skAniOnce(this.sk,"jingdutiao",true);
+            // ActionEffect.scaleBigToSmall(this.icon, 1.2, 1, 0.2);
+            ActionEffect.skAniOnce(this.sk,"loop",true);
             AudioManager.vibrate(100, 155);
         })
 

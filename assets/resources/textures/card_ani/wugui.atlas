@@ -1,0 +1,27 @@
+
+wugui.png
+size: 507,153
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+dikuang
+  rotate: false
+  xy: 2, 2
+  size: 198, 149
+  orig: 198, 149
+  offset: 0, 0
+  index: -1
+jingbi
+  rotate: true
+  xy: 402, 39
+  size: 112, 103
+  orig: 112, 104
+  offset: 0, 1
+  index: -1
+wugui
+  rotate: false
+  xy: 202, 26
+  size: 198, 125
+  orig: 198, 125
+  offset: 0, 0
+  index: -1

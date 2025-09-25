@@ -1,0 +1,20 @@
+
+he.png
+size: 311,193
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hei
+  rotate: false
+  xy: 2, 6
+  size: 161, 185
+  orig: 161, 207
+  offset: 0, 22
+  index: -1
+kuang
+  rotate: true
+  xy: 165, 2
+  size: 189, 144
+  orig: 189, 144
+  offset: 0, 0
+  index: -1

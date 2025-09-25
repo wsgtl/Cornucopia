@@ -1,0 +1,61 @@
+
+caijindonghua.png
+size: 1271,1801
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+qiandaizi
+  rotate: true
+  xy: 687, 1271
+  size: 528, 549
+  orig: 528, 549
+  offset: 0, 0
+  index: -1
+yuanbao1
+  rotate: false
+  xy: 478, 1675
+  size: 207, 124
+  orig: 209, 126
+  offset: 1, 1
+  index: -1
+yuanbao2
+  rotate: false
+  xy: 310, 1700
+  size: 166, 99
+  orig: 168, 101
+  offset: 1, 1
+  index: -1
+yuanbao3
+  rotate: false
+  xy: 2, 1708
+  size: 152, 91
+  orig: 154, 93
+  offset: 1, 1
+  index: -1
+yuanbao4
+  rotate: false
+  xy: 156, 1708
+  size: 152, 91
+  orig: 154, 93
+  offset: 1, 1
+  index: -1
+yuangguangxiao
+  rotate: false
+  xy: 2, 2
+  size: 1267, 1267
+  orig: 1284, 1283
+  offset: 9, 9
+  index: -1
+
+caijindonghua2.png
+size: 1441,1437
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+shexian
+  rotate: false
+  xy: 2, 2
+  size: 1437, 1433
+  orig: 1496, 1496
+  offset: 28, 32
+  index: -1
