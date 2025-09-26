@@ -4,8 +4,12 @@ import { Sprite } from 'cc';
 import { delay } from '../../../Cornucopia_common/utils/TimeUtil';
 const { ccclass, property } = _decorator;
 
-@ccclass('CoinAni')
-export class CoinAni extends Component {
+@ccclass('CoinSpin')
+export class CoinSpin extends Component {
+    @property(Number)
+    public all = 13;s
+    @property(Number)
+    public oneTime = 0.02;
     start() {
         this.setIcon();
     }
@@ -13,14 +17,19 @@ export class CoinAni extends Component {
     public set speed(s: number) {
         this.curTime = this.oneTime / s;
     }
+    protected onLoad(): void {
+        this.curTime = this.oneTime;
+    }
 
-    private readonly all = 13;
-    private readonly oneTime = 0.02;
+    // private readonly all = 13;
+    // private readonly oneTime = 0.02;
     private index: number = 1;
     private t: number = 0;
     private curTime: number = this.oneTime;
-
+    public isStop:boolean = false;
+ 
     protected update(dt: number): void {
+        if(this.isStop)return;
         this.t += dt;
         let n = 1;
         if (this.t >= this.curTime) {

@@ -129,9 +129,9 @@ export class Board extends Component {
             const lineAniIndex = GameManger.instance.findFreeGameStart();
             const isLineAni = lineAniIndex > 0 && lineAniIndex <= GameUtil.AllCol
             for (let i = 0; i < GameUtil.AllCol; i++) {
-                const lineAniAdd = (isLineAni && i >= lineAniIndex - 1) ? 2 : 0;
-                q += (i == 0) ? MathUtil.random(3, 5) : MathUtil.random(1, 2);
-                q += lineAniAdd;
+                const lineAniAdd = (isLineAni && i >= lineAniIndex - 1) ? 4 : 0;
+                q += (i == 0) ? MathUtil.random(3, 5) : (lineAniAdd?lineAniAdd: MathUtil.random(1, 2));
+                // q += lineAniAdd;
                 const wait = 0.1 * i;
 
                 this.spinOne(i, [board[0][i], board[1][i], board[2][i]], q, wait, lineAniIndex > 0)
@@ -188,12 +188,14 @@ export class Board extends Component {
         this.showLineLight(data);
     }
     private showLine(line: number[]) {
-        // this.ls.forEach((list, x) => {
-        //     const y = line[x];
-        //     list.children.forEach((card, i) => {
-        //         card.getComponent(Card).showBorder(i == y);
-        //     })
-        // })
+        this.ls.forEach((list, x) => {
+            const y = line[x];
+            list.children.forEach((card, i) => {
+                // card.getComponent(Card).showBorder(i == y);
+                if(i == y)
+                    card.getComponent(Card).breathe();
+            })
+        })
         this.borders.active = line.length > 0;
         for (let i = 0; i < 5; i++) {
             const b = this.borders.children[i];
@@ -215,6 +217,7 @@ export class Board extends Component {
         pos.forEach(v => {
             const card = this.ls[v.x].children[v.y];
             card.getComponent(Card).shotAni();
+            card.getComponent(Card).breathe();
             ViewManager.showRewardParticle(type, card, toNode, () => { }, duration, double);
         })
         await delay(duration);
@@ -227,6 +230,7 @@ export class Board extends Component {
         pos.forEach(v => {
             const card = this.ls[v.x].children[v.y];
             card.getComponent(Card).shotAni();
+            card.getComponent(Card).breathe();
             // card.getComponent(Card).setColor(false);
         })
         await delay(duration);
@@ -321,7 +325,7 @@ export class Board extends Component {
     private popFreegame(x: number) {
         let num = 0;
         this.ls[x].children.forEach(v => {
-            if (v.getComponent(Card).pop(CardType.freeGame)) num++;
+            if (v.getComponent(Card).popOnce(CardType.freeGame)) num++;
         });
         return num > 0;
     }
@@ -329,7 +333,7 @@ export class Board extends Component {
     private breatheFreegame() {
         this.ls.forEach(v => {
             v.children.forEach(v => {
-                v.getComponent(Card).breathe(CardType.freeGame);
+                v.getComponent(Card).breathe1(CardType.freeGame);
             })
         })
     }

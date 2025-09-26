@@ -42,6 +42,7 @@ import { ActionEffect } from '../../../Cornucopia_common/effects/ActionEffect';
 import { FountainAni } from '../aniComponent/FountainAni';
 import { MathUtil } from '../../../Cornucopia_common/utils/MathUtil';
 import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
+import { Jbp } from '../component/Jbp';
 const { ccclass, property } = _decorator;
 
 const debug = Debugger("GameView")
@@ -49,10 +50,6 @@ const debug = Debugger("GameView")
 export class GameView extends ViewComponent {
     @property(Node)
     content: Node = null;
-    @property(Node)
-    bg1: Node = null;
-    @property(Node)
-    bg2: Node = null;
     @property(Top)
     top: Top = null;
     @property(Node)
@@ -85,6 +82,8 @@ export class GameView extends ViewComponent {
     kbn: sp.Skeleton = null;
     @property(FountainAni)
     fountain: FountainAni = null;
+    @property(Jbp)
+    jbp: Jbp = null;
 
 
     onLoad() {
@@ -107,6 +106,8 @@ export class GameView extends ViewComponent {
         this.btnMore.on(Button.EventType.CLICK, this.onMore, this);
         // this.btnCash.on(Button.EventType.CLICK, this.onCash, this);
         this.initGuide();
+        this.jbp.aniNormal();
+        // this.jbp.aniFreeGame();
     }
 
     fit() {
@@ -119,11 +120,11 @@ export class GameView extends ViewComponent {
         this.jackpot.y = 700 + cy * 0.8;
 
         // const kbn = this.content.getChildByName("kbn");
-        this.kbn.node.y = 440 + ch * 0.3;
+        // this.kbn.node.y = 440 + ch * 0.3;
         this.jackpot.getComponent(Layout).spacingY = 20 + Math.floor(ch / 8);
         if (ch > 200) {
-            const sc = Math.min(1.15, 1 + ch / 1400);
-            this.kbn.node.scale = v3(sc, sc);
+            // const sc = Math.min(1.15, 1 + ch / 1400);
+            // this.kbn.node.scale = v3(sc, sc);
             // this.boardContent.y=0+30;s
 
         }
@@ -133,8 +134,8 @@ export class GameView extends ViewComponent {
         console.log("h", h);
 
         const bgSc = Math.max(1, 1 + cha / 1200);
-        this.bg1.scale = v3(1, bgSc);
-        this.bg2.scale = v3(1, bgSc);
+        // this.bg1.scale = v3(1, bgSc);
+        // this.bg2.scale = v3(1, bgSc);
         nextFrame().then(() => {
             const p = UIUtils.transformOtherNodePos2localNode(this.node, this.dialogNode);
             this.dialogNode.position = p;
@@ -229,9 +230,10 @@ export class GameView extends ViewComponent {
             this.showBg(2);
             this.winNode.showWinNormal();
             this.showFreeGameTimes();
-            ActionEffect.skAni(this.kbn, "idle2");//切换哪吒动画
-            this.fountain.node.active = true;//金币喷泉动画
+            // ActionEffect.skAni(this.kbn, "idle2");//切换哪吒动画
+            // this.fountain.node.active = true;//金币喷泉动画
             this.playBgm(true);
+            this.jbp.aniFreeGame();
         });
 
         //开始免费游戏转轮
@@ -259,9 +261,10 @@ export class GameView extends ViewComponent {
             this.showBg(1);
             this.btnSpin.setFreeGame(false);
             this.board.setSpinNormal();
-            ActionEffect.skAni(this.kbn, "idle1");//切换哪吒动画
-            this.fountain.node.active = false;//金币喷泉动画
+            // ActionEffect.skAni(this.kbn, "idle1");//切换哪吒动画
+            // this.fountain.node.active = false;//金币喷泉动画
             this.playBgm(false);
+            this.jbp.aniNormal();
         });
         await this.freeGameEndWin();
         if (this.btnSpin.isAuto) {
@@ -273,7 +276,7 @@ export class GameView extends ViewComponent {
     }
     private showBg(i: number) {
         // this.bg1.active = i == 1;
-        this.bg2.active = i == 2;
+        // this.bg2.active = i == 2;
         // this.treasure.node.active = i == 1;
         // this.treasure.node.y = i==1?260:160;
         this.energy.node.active = i == 1;

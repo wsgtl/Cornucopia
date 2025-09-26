@@ -10,6 +10,7 @@ import { tween } from 'cc';
 import { delay } from '../../../Cornucopia_common/utils/TimeUtil';
 import { isVaild } from '../../../Cornucopia_common/utils/ViewUtil';
 import { Widget } from 'cc';
+import { NodePool } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('FountainAni')
@@ -25,7 +26,9 @@ export class FountainAni extends Component {
     @property(Boolean)
     isMain: boolean = false;
     private h: number = 1800;
+    private pool: NodePool;
     protected onLoad(): void {
+        this.pool = new NodePool();
         const size = view.getVisibleSize();
         this.h += size.y - 1920;
         if(this.isMain){

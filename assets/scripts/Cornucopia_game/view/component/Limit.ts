@@ -46,7 +46,7 @@ export class Limit extends Component {
     }
     /**限时活动循环显示 */
     private async limitLoopShow() {
-         await this.limitShow(2);
+        //  await this.limitShow(2);
         await this.limitShow(0, 5);
         await this.limitShow(1);
         await this.limitShow(0, 5);
