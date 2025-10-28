@@ -64,13 +64,13 @@ export enum LimitType {
    cash = 1,
    lotus,
 }
-/**提现卡类型 */
-export enum PayType {
-   paypal = 1,
-   googleplay,
-   steam,
-   visa
-}
+// /**提现卡类型 */
+// export enum PayType {
+//    paypal = 1,
+//    googleplay,
+//    steam,
+//    visa
+// }
 export type LuckyRewardData = {
    type: RewardType,
    num: number,
@@ -91,10 +91,10 @@ export type LineData = {
    winType: WinType,
    coin: number
 }
-export type CoinCashData = {
-   coin: number,
-   money: number,
-}
+// export type CoinCashData = {
+//    coin: number,
+//    money: number,
+// }
 
 export namespace GameUtil {
    export const CardW: number = 204;//卡牌宽
@@ -120,14 +120,16 @@ export namespace GameUtil {
    /**新手引导送大额钱 */
    export const GuideMoney: number = 50;
    /**3~5个免费游戏标可以有几次免费游戏 */
-   export const FreeGameTimes: number[] = [5, 6, 7];
+   // export const FreeGameTimes: number[] = [5, 6, 7];
+   export const FreeGameTimes: number[] = [6, 6, 6];
+   // export const FreeGameTimes: number[] = [1, 1, 1];
    /**看广告增加的免费游戏次数 */
-   export const FreeGameAddTimes: number = 3;
+   export const FreeGameAddTimes: number = 6;
    /**钱提现金额 */
    export const moneyCash: number[] = [500, 1000, 1500, 2000, 2500, 3000];
    const yi = 100000000;
    /**金币提现金额 */
-   export const coinCash: CoinCashData[] = [{ coin: 3 * yi, money: 500 }, { coin: 6 * yi, money: 1000 }, { coin: 9 * yi, money: 1500 }, { coin: 12 * yi, money: 2000 }, { coin: 15 * yi, money: 2500 }, { coin: 18 * yi, money: 3000 }];
+   // export const coinCash: CoinCashData[] = [{ coin: 3 * yi, money: 500 }, { coin: 6 * yi, money: 1000 }, { coin: 9 * yi, money: 1500 }, { coin: 12 * yi, money: 2000 }, { coin: 15 * yi, money: 2500 }, { coin: 18 * yi, money: 3000 }];
    /**每个连线卡获得金币数 */
    export const lineCoin: number[][] = [
       [],
@@ -158,11 +160,11 @@ export namespace GameUtil {
    ];
 
 
-   export function getCashNum(bl: number = 1) {//获取最低提现金额
-      const rate = LangStorage.getData().rate;
-      // return Math.floor(rate * CashNum * bl);
-      return Math.floor(rate * moneyCash[0] * bl);
-   }
+   // export function getCashNum(bl: number = 1) {//获取最低提现金额
+   //    const rate = LangStorage.getData().rate;
+   //    // return Math.floor(rate * CashNum * bl);
+   //    return Math.floor(rate * moneyCash[0] * bl);
+   // }
 
    export function getCurDay() {
       const ct = Date.now();

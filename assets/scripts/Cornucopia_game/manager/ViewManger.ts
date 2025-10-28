@@ -290,7 +290,7 @@ export namespace ViewManager {
     }
     /** 提现界面 */
     export function showWithdrawDialog(isCoin:boolean = false) {
-        prefabs.instantiate("prefabs/dialog/withdrawDialog").then((dialog) => {
+        prefabs.instantiate("prefabs/withdraw/withdrawDialog").then((dialog) => {
             if (isVaild(dialog)) {
                 const script = dialog.getComponent(ViewComponent);
                 script.show(upperNode, { isCoin});
@@ -326,7 +326,7 @@ export namespace ViewManager {
     }
     /** 提现卡设置界面 */
     export function showWithdrawalMethodDialog(cb:Function,closeCb:Function) {
-        prefabs.instantiate("prefabs/dialog/withdrawMethodDialog").then((dialog) => {
+        prefabs.instantiate("prefabs/withdraw/withdrawMethodDialog").then((dialog) => {
             if (isVaild(dialog)) {
                 const script = dialog.getComponent(ViewComponent);
                 script.show(upperNode, { cb,closeCb});

@@ -14,6 +14,8 @@ import { MathUtil } from '../../../Cornucopia_common/utils/MathUtil';
 import { view } from 'cc';
 import { UIUtils } from '../../../Cornucopia_common/utils/UIUtils';
 import { v3 } from 'cc';
+import { WithdrawUtil } from '../withdraw/WithdrawUtil';
+import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
 const { ccclass, property } = _decorator;
 
 @ccclass('Loading')
@@ -47,6 +49,8 @@ export class Loading extends ViewComponent {
             }
             await delay(0.03);
         }
+               
+        WithdrawUtil.queueSub();
     }
     show(parent: Node, args?: any) {
         parent.addChild(this.node);
@@ -58,6 +62,7 @@ export class Loading extends ViewComponent {
             console.log("回前台显示插屏广告");
         })
         this.fit();
+        EventTracking.sendOneEvent("loading");
     }
     fit() {
         const h = view.getVisibleSize().y;

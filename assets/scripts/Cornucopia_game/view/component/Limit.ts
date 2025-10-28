@@ -20,20 +20,32 @@ export class Limit extends Component {
     private curLimit: LimitType = 1;
     start() {
         this.btn.on(Button.EventType.CLICK, () => {
-            if (GameManger.instance.isAni){ 
+            if (GameManger.instance.isAni) {
                 ViewManager.showTips(i18n.string("str_pstf"));
                 return;
             }
-            const cur = this.curLimit;
-            if (cur > 0) {
-                ViewManager.showLimitDialog(this.curLimit, () => {
-                    if (cur == this.curLimit) {
-                        this.showCurLimit(false);
-                    }
-                });
-            }
+            // const cur = this.curLimit;
+            // if (cur > 0) {
+            //     ViewManager.showLimitDialog(this.curLimit, () => {
+            //         if (cur == this.curLimit) {
+            //             this.showCurLimit(false);
+            //         }
+            //     });
+            // }
+            this.showLimitDialog();
         })
         this.limitLoopShow();
+    }
+    private showLimitDialog() {
+        GameStorage.setLimitIsOpen();
+        const cur = this.curLimit;
+        if (cur > 0) {
+            ViewManager.showLimitDialog(this.curLimit, () => {
+                if (cur == this.curLimit) {
+                    this.showCurLimit(false);
+                }
+            });
+        }
     }
     private showCurLimit(show: boolean) {
         // const show = this.curLimit > 0
@@ -49,8 +61,11 @@ export class Limit extends Component {
         //  await this.limitShow(2);
         await this.limitShow(0, 5);
         await this.limitShow(1);
-        await this.limitShow(0, 5);
-        await this.limitShow(2);
+        // if (!GameStorage.getLimit().isOpen) {
+        //     this.showLimitDialog();
+        // }
+        // await this.limitShow(0, 5);
+        // await this.limitShow(2);
         this.limitLoopShow();
     }
     private async limitShow(cur: number, time: number = 30) {
@@ -76,6 +91,12 @@ export class Limit extends Component {
         } else {
             if (cur > 0) time = 5;//如果非空，等待短些
             await delay(time, this.node);
+        }
+    }
+
+    public autoOpen() {
+        if (!GameStorage.getLimit().isOpen) {
+            this.showLimitDialog();
         }
     }
 }

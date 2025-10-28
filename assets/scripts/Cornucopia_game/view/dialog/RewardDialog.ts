@@ -21,6 +21,8 @@ import { GuideManger } from '../../manager/GuideManager';
 import { Money } from '../component/Money';
 import { LangStorage } from '../../../Cornucopia_common/localStorage/LangStorage';
 import { FormatUtil } from '../../../Cornucopia_common/utils/FormatUtil';
+import { WithdrawUtil } from '../withdraw/WithdrawUtil';
+import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
 const { ccclass, property } = _decorator;
 
 @ccclass('RewardDialog')
@@ -29,14 +31,20 @@ export class RewardDialog extends DialogComponent {
     btnReceive: Node = null;
     @property(Node)
     btnClaim: Node = null;
+    @property(Node)
+    sp: Node = null;
     @property(NumFont)
     num: NumFont = null;
+    @property(NumFont)
+    btnNum: NumFont = null;
 
 
     type: RewardType;
     cb: Function;
     private rewardNum: number = 1;//奖励数量
-    private reciveNum: number = 2;//看广告领取倍率
+    private rewardNumAd: number = 1;//广告奖励数量
+    // private reciveNum: number = 2;//看广告领取倍率
+    private isFree: boolean = false;
     show(parent: Node, args?: any) {
         parent.addChild(this.node);
         this.init();
@@ -50,15 +58,28 @@ export class RewardDialog extends DialogComponent {
         // this.showReciveNum(2);
         const data = LangStorage.getData();
         const isGuide = GuideManger.isGuide() && GameStorage.getMoney() < 5;
-        this.rewardNum = isGuide ? MoneyManger.instance.rate(GameUtil.GuideMoney)  : MoneyManger.instance.getReward();
+        // this.rewardNum = isGuide ? MoneyManger.instance.rate(GameUtil.GuideMoney) : MoneyManger.instance.getReward();
+        this.rewardNum = MoneyManger.instance.getReward(WithdrawUtil.MoneyBls.RewardFree);
+        this.rewardNumAd = MoneyManger.instance.getReward(WithdrawUtil.MoneyBls.RewardAd);
         this.num.aligning = 1;
-        this.num.num = data.symbol + " " + FormatUtil.toXXDXXxsd(this.rewardNum);
+        // this.num.num = data.symbol + " " + FormatUtil.toXXDXXxsd(this.rewardNum);
+        // this.btnNum.num = data.symbol + " " + FormatUtil.toXXDXXxsd(this.rewardNum * this.reciveNum);
+        this.num.num = FormatUtil.toMoney(this.rewardNum);
+        // this.btnNum.num = FormatUtil.toMoney(this.rewardNum * this.reciveNum);
+        this.btnNum.num = FormatUtil.toMoney(this.rewardNumAd);
         // this.showMoneyNode();
 
         this.btnClaim.once(Button.EventType.CLICK, this.onBtnClaim, this);
         this.btnReceive.on(Button.EventType.CLICK, this.onBtnReceive, this);
 
-
+        const ft = GameStorage.getFreeTime();
+        this.isFree = ft.money < 3;//前三次免费
+        if (this.isFree) {
+            ft.money += 1;
+            GameStorage.setFreeTime(ft);
+            this.btnClaim?.destroy();
+        }
+        this.sp.active = !this.isFree;
 
     }
 
@@ -71,10 +92,18 @@ export class RewardDialog extends DialogComponent {
         // }
     }
     onBtnReceive() {
-        adHelper.showRewardVideo("钱奖励弹窗", () => {
-            this.addReward(this.rewardNum * this.reciveNum);
+        if (this.isFree) {
+            this.addReward(this.rewardNumAd);
             this.closeAni();
-        }, ViewManager.adNotReady)
+            EventTracking.sendOneEvent("getMoney");
+        } else {
+            adHelper.showRewardVideo("钱奖励弹窗", () => {
+                // this.addReward(this.rewardNum * this.reciveNum);
+                this.addReward(this.rewardNumAd);
+                this.closeAni();
+            }, ViewManager.adNotReady)
+        }
+
     }
     private addReward(num: number) {
         // ViewManager.showRewardAni(1, num, this.cb);
@@ -89,5 +118,6 @@ export class RewardDialog extends DialogComponent {
 
 
 }
+
 
 

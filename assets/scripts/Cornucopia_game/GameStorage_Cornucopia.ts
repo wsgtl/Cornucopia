@@ -1,5 +1,5 @@
 import { BaseStorageNS, ITEM_STORAGE } from "../Cornucopia_common/localStorage/BaseStorage";
-import { PayType } from "./GameUtil_Cornucopia";
+import { PayType } from "./view/withdraw/WithdrawUtil";
 
 
 /**
@@ -15,6 +15,8 @@ export namespace GameStorage {
         money: 0,
         /**兑换券数 */
         cash: 0,
+        /**点击转动次数 */
+        spin: 0,
         /**宝箱进度 */
         treasure: 0,
         /**葫芦进度 */
@@ -23,6 +25,12 @@ export namespace GameStorage {
         payType: 1,
         /**提现卡号 */
         cardId: "",
+        /**免费次数 */
+        freeTimes: {
+            win: 0,//大赢抽奖已经免费观看次数
+            freegame: 0,//免费游戏额外加6次免费次数
+            money: 0,//领钱免费次数
+        },
         /**体力 */
         energy: {
             /**体力值 */
@@ -45,6 +53,8 @@ export namespace GameStorage {
             cash: 0,
             /**上次免费领取奖励天数 */
             day: 0,
+            /**是否打开过 */
+            isOpen: 0,
         },
         /**当前关卡 */
         curLevel: 1,
@@ -192,6 +202,12 @@ export namespace GameStorage {
         _gameData.limit.day = day;
         saveLocal();
     }
+    /**限时活动是否弹出过 */
+    export function setLimitIsOpen() {
+        if (_gameData?.limit?.isOpen == 1) return;
+        _gameData.limit.isOpen = 1;
+        saveLocal();
+    }
     /**提现卡类型 */
     export function getPayType() {
         return _gameData.payType;
@@ -263,5 +279,22 @@ export namespace GameStorage {
         _gameData.energy.time = v;
         saveLocal();
     }
-
+    /**获取免费次数信息 */
+    export function getFreeTime() {
+        return _gameData.freeTimes;
+    }
+    /**设置免费次数信息 */
+    export function setFreeTime(s) {
+        _gameData.freeTimes = s;
+        saveLocal();
+    }
+    /**获取点击转动次数 */
+    export function getSpin() {
+        return _gameData.spin;
+    }
+    /**增加点击转动次数 */
+    export function addSpin() {
+        _gameData.spin += 1;
+        saveLocal();
+    }
 }

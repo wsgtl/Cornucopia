@@ -13,6 +13,9 @@ import { GameManger } from '../../manager/GameManager';
 import { AudioManager } from '../../manager/AudioManager';
 import { i18n } from '../../../Cornucopia_common/i18n/I18nManager';
 import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
+import { Tween } from 'cc';
+import { Label } from 'cc';
+import { delay } from '../../../Cornucopia_common/utils/TimeUtil';
 const { ccclass, property } = _decorator;
 
 @ccclass('Top')
@@ -37,6 +40,8 @@ export class Top extends Component {
     lvbg: Node = null;
     @property(Node)
     lvTips: Node = null;
+    @property(Node)
+    tipBubble: Node = null;
 
     protected onLoad(): void {
         this.btnRule.on(Button.EventType.CLICK, this.onRule, this);
@@ -49,7 +54,7 @@ export class Top extends Component {
     }
 
     onRule() {
-        if (GameManger.instance.isAni){
+        if (GameManger.instance.isAni) {
             ViewManager.showTips(i18n.string("str_pstf"));
             return;
         }
@@ -116,7 +121,7 @@ export class Top extends Component {
             //加5000金币
             this.lvUpReward();
             upCb();
-            EventTracking.sendEventLevel(lv+1);
+            EventTracking.sendEventLevel(lv + 1);
         }
     }
     private isLvAni: boolean = false;
@@ -149,6 +154,13 @@ export class Top extends Component {
                 this.isLvAni = false;
             })
             .start();
+    }
+    public async showTipBubble(tip: string) {
+        this.tipBubble.active = true;
+        this.tipBubble.getChildByName("tip").getComponent(Label).string = tip;
+        Tween.stopAllByTarget(this.tipBubble);
+        await delay(6, this.tipBubble);
+        this.tipBubble.active = false;
     }
 }
 

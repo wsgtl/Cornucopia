@@ -13,6 +13,8 @@ import { GameUtil } from '../../GameUtil_Cornucopia';
 import { NumFont } from '../../../Cornucopia_common/ui/NumFont';
 import { adHelper } from '../../../Cornucopia_common/native/AdHelper';
 import { ViewManager } from '../../manager/ViewManger';
+import { GameStorage } from '../../GameStorage_Cornucopia';
+import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
 const { ccclass, property } = _decorator;
 
 @ccclass('FreeGameAdd')
@@ -25,11 +27,14 @@ export class FreeGameAdd extends DialogComponent {
     btnNt: Node = null;
     @property(Sprite)
     btnMask: Sprite = null;
+    @property(Node)
+    sp: Node = null;
     @property([Node])
     aniNodes: Node[] = [];
 
 
     private cb: Function;
+    private isFree: boolean = false;
     show(parent: Node, args?: any): void {
         super.show(parent);
 
@@ -38,22 +43,37 @@ export class FreeGameAdd extends DialogComponent {
         this.btnAdd.on(Button.EventType.CLICK, this.onAdd, this);
         this.btnNt.on(Button.EventType.CLICK, this.onNt, this);
 
-
+        const ft = GameStorage.getFreeTime();
+        this.isFree = ft.freegame < 1;//前一次免费
+        if (this.isFree) {
+            ft.freegame += 1;
+            GameStorage.setFreeTime(ft);
+            this.btnNt?.destroy();
+        }
+        this.sp.active = !this.isFree;
         AudioManager.playEffect("reward", 2);
     }
     async onAdd() {
         if (this.isAni) return;
         this.isAni = true;
-        adHelper.showRewardVideo("免费游戏增加次数弹窗",async ()=>{
-            GameManger.instance.freegameTimes = GameUtil.FreeGameAddTimes;
-            await this.closeAni();
-            this.cb?.();
-        },()=>{
-            ViewManager.adNotReady();
-            this.isAni = false;
-        })
-       
-        
+        if (this.isFree) {
+            EventTracking.sendOneEvent("againFreeGame");
+            this.add();
+        } else {
+            adHelper.showRewardVideo("免费游戏增加次数弹窗", async () => {
+                this.add();
+            }, () => {
+                ViewManager.adNotReady();
+                this.isAni = false;
+            })
+        }
+
+
+    }
+    async add() {
+        GameManger.instance.freegameTimes = GameUtil.FreeGameAddTimes;
+        await this.closeAni();
+        this.cb?.();
     }
     async onNt() {
         if (this.isAni) return;
@@ -67,32 +87,33 @@ export class FreeGameAdd extends DialogComponent {
         // AudioManager.playEffect("gufen");
         this.isAni = true;
         if (this.bg) ActionEffect.fadeIn(this.bg, 0.3);
-        const waitTimes = [0, 0.1, 0.25, 0.3, 0.4, 0.4,0.4];//各个动画节点等待出现时机
-        const bigs = [1.3,1.2,1.2,1.2,1.2,1.1,1.1];//各个动画节点最大
+        const waitTimes = [0, 0.1, 0.25, 0.3, 0.4, 0.4, 0.4];//各个动画节点等待出现时机
+        const bigs = [1.3, 1.2, 1.2, 1.2, 1.2, 1.1, 1.1];//各个动画节点最大
         this.aniNodes.forEach(async (v, i) => {
             v.scale = v3();
             await delay(waitTimes[i]);
             // ActionEffect.scale(v, 0.4, 1, 0, "backOut");
             // ActionEffect.scaleBigToSmall(v,1.2,1,0.6);
-            ActionEffect.scaleBigToSmall(v,bigs[i],1,0.6);
+            ActionEffect.scaleBigToSmall(v, bigs[i], 1, 0.6);
         })
         await delay(1, this.node);
-        this.isAni = false; 
+        this.isAni = false;
         // this.waitBtn();
     }
     /**关闭动画 */
     async closeAni() {
-        this.btnAdd.getComponent(Button).interactable=false;
+        this.btnAdd.getComponent(Button).interactable = false;
         // if (this.isAni) return;
         // this.isAni = true;
         ActionEffect.fadeOut(this.bg, 1);
-        const waitTimes = [0.4, 0.35, 0.25, 0.2, 0, 0,0];//各个动画节点等待出现时机
+        const waitTimes = [0.4, 0.35, 0.25, 0.2, 0, 0, 0];//各个动画节点等待出现时机
         this.aniNodes.forEach(async (v, i) => {
             await delay(waitTimes[i]);
-            ActionEffect.scale(v, 0.4, 0, 1, "backIn");
+            if (isVaild(v))
+                ActionEffect.scale(v, 0.4, 0, 1, "backIn");
         })
         await delay(1, this.node);
-        
+
         this.node.destroy();
         this.closeCb?.();
     }

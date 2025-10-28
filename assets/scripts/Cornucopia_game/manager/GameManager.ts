@@ -6,6 +6,7 @@ import { GameStorage } from "../GameStorage_Cornucopia";
 import { GameView } from "../view/view/GameView";
 import { CardType, GameUtil, LineData, LineOneData, WinType } from "../GameUtil_Cornucopia";
 import { GuideManger } from "./GuideManager";
+import { i18n } from "../../Cornucopia_common/i18n/I18nManager";
 
 const debug = Debugger("GameManger");
 export class GameManger {
@@ -63,13 +64,15 @@ export class GameManger {
     // };
 
 
-    public getNewBoard() {
+     public getNewBoard() {
+        // return this.boardControl(1);
         // this.borad = [
         //     [1, 2, 3, 4, 11,],
         //     [3, 2, 12, 1, 5,],
         //     [11, 4, 1, 5, 7,],
         // ]
         // return this.borad;
+        //新手引导
         if (GuideManger.isGuide()) {
             this.board = [
                 [1, 8, 11, 6, 1,],
@@ -78,14 +81,27 @@ export class GameManger {
             ]
             return this.board;
         }
-        // this.board = [];
+
+        // 免费游戏
         if (this.isFreeGame) {
             return this.freeGameBoardControl();
         }
-
+        //新手阶段
+        const spin = GameStorage.getSpin();
+        if (spin < 3) {
+            return this.newHand(spin);
+        }
 
         return this.boardControl();
 
+    }
+    /**新手阶段 */
+    private newHand(spin: number) {
+        switch (spin) {
+            case 1: { return this.boardControl(1); }
+            case 2: { return this.boardControl(3); }
+        }
+        return this.board;
     }
     /**普通随机机台 */
     private normalBoard() {
@@ -101,9 +117,18 @@ export class GameManger {
     private mustLineBoard() {
         const list = GameUtil.lines.getRandomItem();
         let lineNum = MathUtil.probability(0.1) ? 5 : MathUtil.random(3, 4);//随机连线个数,出5个概率较低
-        let type = MathUtil.probability(0.15) ? MathUtil.random(6, 9) : MathUtil.random(1, 5);//随机类型,降低主图标出现概率
+        let type = MathUtil.probability(0.18) ? MathUtil.random(6, 9) : MathUtil.random(1, 5);//随机类型,降低主图标出现概率
         // lineNum = 5;
         // type = MathUtil.random(6,9);
+        for (let i = 0; i < lineNum; i++) {
+            this.board[list[i]][i] = type;
+        }
+    }
+    /**必出big win */
+    private mustBigWin() {
+        const list = GameUtil.lines.getRandomItem();
+        let lineNum = 5;
+        let type = MathUtil.random(6, 9);
         for (let i = 0; i < lineNum; i++) {
             this.board[list[i]][i] = type;
         }
@@ -130,20 +155,24 @@ export class GameManger {
     }
 
 
-    /**机台卡片控制 */
-    private boardControl() {
+    /**机台卡片控制
+     * @param status 0:普通 1：必出big win 2：必出钱  3：必出免费游戏
+     */
+    private boardControl(status: number = 0) {
         this.clearCards();//先清空卡片数据
 
 
         //连线控制
-        if (this.mustLineNum > 0) {
-            this.mustLineNum--;
-            this.mustLineBoard();
+        if (status == 1) {
+            this.mustBigWin();
+        } else {
+            if (this.mustLineNum > 0) {
+                this.mustLineNum--;
+                this.mustLineBoard();
+            }
         }
 
-        const type = MathUtil.random(0, 2);
         //金莲控制
-        // if (type == 1 || this.mustLotus > 0) {
         if (MathUtil.probability(0.5) || this.mustLotus > 0) {
             let num1 = MathUtil.random(1, 3);
             if (this.mustLotus > 0) {
@@ -154,23 +183,32 @@ export class GameManger {
         }
         // this.insertCard(CardType.lotus, 1);//金莲必出测试代码
         //钱卡片控制
-        // if (type == 2 || this.mustMoney > 0) {
-        if (MathUtil.probability(0.4) || this.mustMoney > 0) {
-            let num2 = MathUtil.random(1, 4);
-            if (this.mustMoney > 0) {
-                this.mustMoney--;
-                num2 = MathUtil.random(2, 4);
-            }
+        if (status == 2) {
+            this.insertCard(CardType.money, 3);//钱必出
+        } else {
+            if (MathUtil.probability(0.6) || this.mustMoney > 0) {
+                let num2 = MathUtil.random(1, 4);
+                if (this.mustMoney > 0) {
+                    this.mustMoney--;
+                    num2 = MathUtil.random(2, 4);
+                }
             this.insertCard(CardType.money, num2);
+            }
         }
+
         // this.insertCard(CardType.money, 3);//钱必出测试代码
         //免费游戏控制
-        if (MathUtil.probability(0.5)) {
-            let num3 = MathUtil.probability(0.85) ? MathUtil.random(1, 2) : MathUtil.random(3, 5);
-            let gl = num3 < 3 ? 0.5 : num3 < 5 ? 0.3 : 0.1;
-            this.insertCardOne(CardType.freeGame, num3, gl);
+        if (status == 3) {
+            this.insertCardOne(CardType.freeGame, 3, 0);//必出免费游戏
+        } else {
+            if (MathUtil.probability(0.5)) {
+                let num3 = MathUtil.probability(0.75) ? 1 : (MathUtil.probability(0.4) ? 2 : MathUtil.random(3, 5));
+                let gl = num3 < 3 ? 0.5 : num3 < 5 ? 0.3 : 0.1;
+                this.insertCardOne(CardType.freeGame, num3, gl);
+            }
         }
-        this.insertCardOne(CardType.freeGame, 3, 0);//免费游戏必出测试代码
+
+        // this.insertCardOne(CardType.freeGame, 3, 0);//免费游戏必出测试代码
 
         //随机插入普通卡片
         this.randomInsertCards();
@@ -180,6 +218,9 @@ export class GameManger {
 
     /**初始化免费游戏相关参数 */
     public initFreeGame() {
+        this.clearFreeGameCards();
+    }
+    public clearFreeGameCards() {
         this.clearCards(this.freeGameBoard);
     }
     /**免费游戏机台控制 */
@@ -388,5 +429,16 @@ export class GameManger {
     /**是否在免费游戏期间 */
     public get isFreeGame() {
         return this.freegameTimes > 0;
+    }
+        /**提示金额或订单还差几次激活
+     * @param status 1:金额 2:转几次
+     */
+    public tipCashOut(status:number,str:string[]){
+        const tip = i18n.string(["str_with_emtu","str_with_smttu"][status-1],...str);
+        this.gv.showTipBubble(tip);
+    }
+     /**到达提现门槛引导 */
+    public guideTipCashOut(){
+        this.gv.guideTipCashOut();
     }
 }

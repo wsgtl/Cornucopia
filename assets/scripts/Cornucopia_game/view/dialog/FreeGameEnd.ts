@@ -44,14 +44,15 @@ export class FreeGameEnd extends DialogComponent {
             this.coin.num = FormatUtil.toXXDXX(n, 0);
         }, true, 20);
         ActionEffect.numAddAni(0, this.moneyNum, (n: number) => {
-            this.money.num = LangStorage.getData().symbol + " " + FormatUtil.toXXDXXxsd(n);
+            // this.money.num = LangStorage.getData().symbol + " " + FormatUtil.toXXDXXxsd(n);
+            this.money.num = FormatUtil.toMoney(n);
         }, false, 10);
 
     }
     async onCollect() {
         if (this.isAni) return;
         this.isAni = true;
-        this.btnCollect.getComponent(Button).interactable=false;
+        this.btnCollect.getComponent(Button).interactable = false;
         await this.closeAni();
         this.cb?.();
     }
@@ -79,7 +80,7 @@ export class FreeGameEnd extends DialogComponent {
         // if (this.isAni) return;
         // this.isAni = true;
         ActionEffect.fadeOut(this.bg, 1);
-        const waitTimes = [0.4, 0.35,0.25, 0.25, 0.2, 0, 0];//各个动画节点等待出现时机
+        const waitTimes = [0.4, 0.35, 0.25, 0.25, 0.2, 0, 0];//各个动画节点等待出现时机
         this.aniNodes.forEach(async (v, i) => {
             await delay(waitTimes[i]);
             ActionEffect.scale(v, 0.4, 0, 1, "backIn");

@@ -16,6 +16,7 @@ export class DialogComponent extends ViewComponent {
     btnClose: Node = null;
 
     isAni: boolean = false;
+    isClose: boolean = false;
     closeCb:Function=null;
     start() {
         this.startAni();
@@ -38,6 +39,7 @@ export class DialogComponent extends ViewComponent {
         if (this.isAni) return;
         // AudioManager.vibrate(1,155);
         this.isAni = true;
+        this.isClose = true;
         await ActionEffect.fadeOut(this.node, 0.3);
         this.node.destroy();
         this.closeCb?.();

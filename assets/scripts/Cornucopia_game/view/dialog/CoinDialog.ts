@@ -11,6 +11,7 @@ import { ActionEffect } from '../../../Cornucopia_common/effects/ActionEffect';
 import { LangStorage } from '../../../Cornucopia_common/localStorage/LangStorage';
 import { NumFont } from '../../../Cornucopia_common/ui/NumFont';
 import { i18n } from '../../../Cornucopia_common/i18n/I18nManager';
+import { FormatUtil } from '../../../Cornucopia_common/utils/FormatUtil';
 const { ccclass, property } = _decorator;
 
 @ccclass('CoinDialog')
@@ -56,7 +57,8 @@ export class CoinDialog extends ViewComponent {
         const data = LangStorage.getData()
         const moneys = Math.floor(money * data.rate);
         const n = btn.getChildByName("num").getComponent(NumFont);
-        n.num = data.symbol + " " + moneys;
+        // n.num = data.symbol + " " + moneys;
+        n.num = FormatUtil.toMoney(moneys);
         btn.on(Button.EventType.CLICK, () => { this.click(moneys, coin, btn) });
     }
 }

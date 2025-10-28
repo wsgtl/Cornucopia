@@ -18,6 +18,7 @@ import { LangStorage } from '../../../Cornucopia_common/localStorage/LangStorage
 import { i18n } from '../../../Cornucopia_common/i18n/I18nManager';
 import { CircleSpin } from '../aniComponent/CircleSpin';
 import { MathUtil } from '../../../Cornucopia_common/utils/MathUtil';
+import { WithdrawUtil } from '../withdraw/WithdrawUtil';
 const { ccclass, property } = _decorator;
 
 @ccclass('LuckyDialog')
@@ -46,7 +47,7 @@ export class LuckyDialog extends DialogComponent {
     init() {
         for (let i = 0; i < 3; i++) {
             let type = MathUtil.probability(0.2) ? RewardType.coin : RewardType.money;
-            let num = type == RewardType.coin ? CoinManger.instance.getReward() : MoneyManger.instance.getReward(0.4);
+            let num = type == RewardType.coin ? CoinManger.instance.getReward() : MoneyManger.instance.getReward(WithdrawUtil.MoneyBls.LuckyDialog);
             if (i == 2) {//大奖
                 type = RewardType.money;
                 num = MoneyManger.instance.getReward(2);

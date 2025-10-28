@@ -1,10 +1,10 @@
 import { _decorator, Component, Node } from 'cc';
-import { DialogComponent } from '../../../Cornucopia_common/ui/DialogComtnet';
 import { EditBox } from 'cc';
-import { GameStorage } from '../../GameStorage_Cornucopia';
 import { Button } from 'cc';
 import { ViewManager } from '../../manager/ViewManger';
 import { i18n } from '../../../Cornucopia_common/i18n/I18nManager';
+import { DialogComponent } from '../../../Cornucopia_common/ui/DialogComtnet';
+import { GameStorage } from '../../GameStorage_Cornucopia';
 const { ccclass, property } = _decorator;
 
 @ccclass('WithdrawMethodDialog')

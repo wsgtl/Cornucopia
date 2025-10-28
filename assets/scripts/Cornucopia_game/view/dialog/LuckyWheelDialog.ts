@@ -92,7 +92,8 @@ export class LuckyWheelDialog extends DialogComponent {
         const num = this.getCurMoney();
         // const xsd = num > 1 ? 2 : (num > 0.01 ? 4 : 6);
         // this.num.num = FormatUtil.toXXDXX(num, xsd);
-        this.num.num = LangStorage.getData().symbol + " " + FormatUtil.toXXDXXxsd(num);
+        // this.num.num = LangStorage.getData().symbol + " " + FormatUtil.toXXDXXxsd(num);
+        this.num.num = FormatUtil.toMoney(num);
     }
     private getCurMoney() {
         return this.baseMoney * this.bls[this.zzIndex];

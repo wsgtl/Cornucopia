@@ -4,9 +4,11 @@ export enum ITEM_STORAGE {
     LANGUAGE = "Cornucopia_Lang",
     AUDIO = "Cornucopia_audio",
     EventTracking = "Cornucopia_event",
+    EventTrackings = "Cornucopia_events",
     Game = "Cornucopia_game",
     JACKPOT = "Cornucopia_jackpot",
-    WAITWITHDRWW = "Cornucopia_waitwithdraw"
+    WAITWITHDRWW = "Cornucopia_waitwithdraw",
+    WAITWITHDRWWS = "Cornucopia_waitwithdraws"
 }
 
 /**

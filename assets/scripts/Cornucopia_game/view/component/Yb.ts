@@ -9,12 +9,18 @@ import { LangStorage } from '../../../Cornucopia_common/localStorage/LangStorage
 import { FormatUtil } from '../../../Cornucopia_common/utils/FormatUtil';
 import { v3 } from 'cc';
 import { ActionEffect } from '../../../Cornucopia_common/effects/ActionEffect';
+import { sprites } from '../../../Cornucopia_common/recycle/AssetUtils';
+import { i18n } from '../../../Cornucopia_common/i18n/I18nManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('Yb')
 export class Yb extends Component {
     @property(Node)
     sp: Node = null;
+    @property(Node)
+    money: Node = null;
+    @property(Node)
+    lotus: Node = null;
     @property(Node)
     showNode: Node = null;
     @property(NumFont)
@@ -40,8 +46,12 @@ export class Yb extends Component {
         if (type > 0) {
             this.showNode.active = true;
             // this.showNode.getChildByName("w").getComponent(Sprite).spriteFrame = this.ws[type - 1];
-            this.showNode.getChildByName("str").getComponent(Sprite).spriteFrame = this.strs[type - 1];
+             // this.showNode.getChildByName("str").getComponent(Sprite).spriteFrame = this.strs[type - 1];
+            const str = ["grand","major",'mini'][type-1]
+            sprites.setTo(this.showNode.getChildByName("str"),i18n.curLangPath(`str_${str}`) );
         } else {
+            this.lotus.active = false;
+            this.money.active = true;
             this.num.node.active = true;
             // num = [0.3,1.1,0.003].getRandomItem();
             this.num.num = LangStorage.getData().symbol + FormatUtil.toXXDXXxsd(num,false,2);

@@ -9,6 +9,7 @@ import { Sprite } from 'cc';
 import { AudioManager } from '../../manager/AudioManager';
 import { v3 } from 'cc';
 import { NumFont } from '../../../Cornucopia_common/ui/NumFont';
+import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
 const { ccclass, property } = _decorator;
 
 @ccclass('FreeGameStart')
@@ -44,7 +45,7 @@ export class FreeGameStart extends DialogComponent {
         this.btnStart.getComponent(Button).interactable=false;
         await this.closeAni();
         this.cb?.();
-        
+        EventTracking.sendOneEvent("startFreeGame");
     }
 
     /**开始动画 */

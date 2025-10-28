@@ -43,6 +43,7 @@ import { FountainAni } from '../aniComponent/FountainAni';
 import { MathUtil } from '../../../Cornucopia_common/utils/MathUtil';
 import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
 import { Jbp } from '../component/Jbp';
+import { WithdrawUtil } from '../withdraw/WithdrawUtil';
 const { ccclass, property } = _decorator;
 
 const debug = Debugger("GameView")
@@ -192,11 +193,12 @@ export class GameView extends ViewComponent {
         }
         this.isAni = true;
         this.board.setSpinNormal();
-
+        WithdrawUtil.spinToOrder();
         // this.showWinCoin(false);
         this.winNode.showWinNormal();
         this.top.addTimes(() => { });
         await this.board.spin();
+        GameStorage.addSpin();
         await this.spinNext();
     }
     /**免费游戏转轮 */
@@ -269,6 +271,9 @@ export class GameView extends ViewComponent {
         await this.freeGameEndWin();
         if (this.btnSpin.isAuto) {
             this.onSpin();
+        }
+        if(GameStorage.getSpin()<5){
+            this.limit.autoOpen();//自动弹加钱弹窗
         }
     }
     private showFreeGameTimes(i:number=0) {
@@ -490,6 +495,15 @@ export class GameView extends ViewComponent {
         this.gm.showMoneyNode(MoneyManger.instance.getMoneyNode().node);
     }
 
+    /**到达提现门槛引导 */
+    public async guideTipCashOut() {
+        ViewManager.showGuideMask(async (n: Node) => {
+            this.gm = n.getComponent(GuideMask);
+            this.gm.showMask();
+            this.gm.showTips(3);
+            this.gm.showMoneyNode(MoneyManger.instance.getMoneyNode().node,false);
+        })
+    }
 
 
 
@@ -498,6 +512,10 @@ export class GameView extends ViewComponent {
         if (this.btnSpin.isAuto) {
             this.onSpin();
         }
+    }
+
+    public showTipBubble(tip: string) {
+        this.top.showTipBubble(tip);
     }
 
 

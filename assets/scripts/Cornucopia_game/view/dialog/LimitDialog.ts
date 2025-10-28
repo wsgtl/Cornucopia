@@ -12,48 +12,51 @@ const { ccclass, property } = _decorator;
 @ccclass('LimitDialog')
 export class LimitDialog extends DialogComponent {
     @property(Node)
-    sp:Node = null;
+    sp: Node = null;
     @property(Node)
-    btnGet:Node = null;
+    btnGet: Node = null;
     @property(Node)
-    btnNt:Node = null;
+    btnNt: Node = null;
     @property([Node])
-    limits:Node[] = [];
+    limits: Node[] = [];
 
-    private type:LimitType;
-    private isFree:boolean = false;
-    private cb:Function;
+    private type: LimitType;
+    private isFree: boolean = false;
+    private cb: Function;
     show(parent: Node, args?: any): void {
         super.show(parent);
         this.type = args.type;
-        this.cb  = args.cb;
-        this.limits.forEach((v,i)=>{
-            v.active = i==this.type-1;
+        this.cb = args.cb;
+        this.limits.forEach((v, i) => {
+            v.active = i == this.type - 1;
         })
-        this.isFree = GameStorage.getLimit().day<GameUtil.getCurDay();
+        this.isFree = GameStorage.getLimit().day < GameUtil.getCurDay();
         this.sp.active = !this.isFree;
-        this.btnGet.on(Button.EventType.CLICK,()=>{
-            if(this.isFree){
+        if (this.isFree) {
+            this.btnNt?.destroy();
+        }
+        this.btnGet.on(Button.EventType.CLICK, () => {
+            if (this.isFree) {
                 this.onlimit();
-            }else{
-                const t = ["钱两个","莲花两个"][this.type-1];
-                adHelper.showRewardVideo(t+"活动弹窗",()=>{
+            } else {
+                const t = ["钱两个", "莲花两个"][this.type - 1];
+                adHelper.showRewardVideo(t + "活动弹窗", () => {
                     this.onlimit();
-                },ViewManager.adNotReady);
+                }, ViewManager.adNotReady);
             }
-           
+
         })
-        this.btnNt.on(Button.EventType.CLICK,()=>{
-           this.closeAni();
-           adHelper.timesToShowInterstitial();      
+        this.btnNt.on(Button.EventType.CLICK, () => {
+            this.closeAni();
+            adHelper.timesToShowInterstitial();
         })
         AudioManager.playEffect("light");
     }
-    private onlimit(){
-        if(this.type==LimitType.cash){//钱标两个
+    private onlimit() {
+        if (this.type == LimitType.cash) {//钱标两个
             // GameStorage.setLimitCash(5);
             GameManger.instance.cash2();
-        }else{//莲花两个
+        } else {//莲花两个
             // GameStorage.setLimitLotus(5);
             GameManger.instance.lotus2();
         }

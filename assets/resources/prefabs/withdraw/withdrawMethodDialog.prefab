@@ -4186,10 +4186,9 @@
     "fileId": "01RLvdVwtAlYyEeCF2D8hJ"
   },
   {
-    "__type__": "83db0jCUt9EBr4ge4DPL1fg",
+    "__type__": "0cc6dXJurZHTq+7P5+C0hvW",
     "_name": "",
     "_objFlags": 0,
-    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -4230,7 +4229,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "9flYwLzBBDmpbBETOX7/x7"
+    "fileId": "4bDdmARxpFELXFsD9E0XqI"
   },
   {
     "__type__": "cc.PrefabInfo",

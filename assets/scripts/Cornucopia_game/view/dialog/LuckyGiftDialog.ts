@@ -18,6 +18,7 @@ import { ActionEffect } from '../../../Cornucopia_common/effects/ActionEffect';
 import { delay } from '../../../Cornucopia_common/utils/TimeUtil';
 import { AudioManager } from '../../manager/AudioManager';
 import { tween } from 'cc';
+import { WithdrawUtil } from '../withdraw/WithdrawUtil';
 const { ccclass, property } = _decorator;
 
 @ccclass('LuckyGiftDialog')
@@ -69,7 +70,7 @@ export class LuckyGiftDialog extends DialogComponent {
         for (let i = 0; i < 6; i++) {
             const index = MathUtil.random(0, 3);
             const type: RewardType = index == 0 ? RewardType.coin : RewardType.money;
-            const num = type == RewardType.coin ? CoinManger.instance.getReward() : MoneyManger.instance.getReward(index / 2);
+            const num = type == RewardType.coin ? CoinManger.instance.getReward() : MoneyManger.instance.getReward(index / 2 * WithdrawUtil.MoneyBls.Pig);
             const rd: RewardData = { type, num };
             this.rds[i] = rd;
             const it = instantiate(this.item);

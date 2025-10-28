@@ -10,6 +10,7 @@ import { Money } from '../component/Money';
 import { Button } from 'cc';
 import { GuideManger } from '../../manager/GuideManager';
 import { BtnSpin } from '../component/BtnSpin';
+import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
 const { ccclass, property } = _decorator;
 
 @ccclass('GuideMask')
@@ -38,7 +39,7 @@ export class GuideMask extends ViewComponent {
         this.db.ani();
     }
 
-   
+
     private cc: Node;
     private ccParent: Node;
     private ccPos: Vec3;
@@ -56,7 +57,7 @@ export class GuideMask extends ViewComponent {
             console.log("spin引导")
             this.ccBack();
             this.showAll(false);
-         }
+        }
         // cc.once(Node.EventType.TOUCH_END, () => {
         //    console.log("spin引导")
         //    this.ccBack();
@@ -70,14 +71,14 @@ export class GuideMask extends ViewComponent {
         }
     }
 
-    
+
 
 
     private mn: Node;
     private mnParent: Node;
     private mnPos: Vec3;
     private mnIndex: number;
-    showMoneyNode(mn: Node) {
+    showMoneyNode(mn: Node, isShowCash: boolean = true) {
         this.mnPos = mn.position.clone();
         this.mn = mn;
         this.mnParent = mn.parent;
@@ -87,6 +88,7 @@ export class GuideMask extends ViewComponent {
             this.mnBack();
             this.node.destroy();
             GuideManger.passGameStep();
+            EventTracking.sendOneEvent("clickMoney");
         })
 
         this.hand.active = true;
@@ -94,10 +96,11 @@ export class GuideMask extends ViewComponent {
         this.hand.x = 300;
         this.hand.angle = 0;
 
-        this.cash.active = true;
-        this.cash.x = 250;
-        this.cash.y = mn.position.y - 300;
-
+        if (isShowCash) {
+            this.cash.active = true;
+            this.cash.x = 250;
+            this.cash.y = mn.position.y - 300;
+        }
     }
     mnBack() {
         if (isVaild(this.mn) && isVaild(this.mnParent)) {
@@ -105,18 +108,18 @@ export class GuideMask extends ViewComponent {
             this.mnParent.insertChild(this.mn, this.mnIndex);
         }
     }
-    hideHand(){
+    hideHand() {
         this.hand.active = false;
     }
-    hideDb(){
+    hideDb() {
         this.db.node.active = false;
     }
-    showAll(v:boolean) {
+    showAll(v: boolean) {
         this.node.active = v;
         this.db.node.active = v;
         this.hand.active = v;
     }
-    
+
 
 }
 
