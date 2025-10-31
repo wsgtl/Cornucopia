@@ -15,7 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.jackpot.cornucopiaii.R;
+import com.rewardslots.bigjackpot.riches.R;
 
 
 public class WebviewActivity extends AppCompatActivity {

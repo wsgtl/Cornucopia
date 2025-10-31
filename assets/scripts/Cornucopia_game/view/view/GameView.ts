@@ -248,6 +248,8 @@ export class GameView extends ViewComponent {
             GameManger.instance.isFreegameAdd = true;
             await this.freeGameAdd();
             if(GameManger.instance.freegameTimes>0){//已增加次数就重新进免费游戏
+                GameManger.instance.clearFreeGameCards();//清理掉wild
+                this.board.clearUpWild();//清理掉wild
                 this.showFreeGameTimes();
                 await this.delay(0.1);
                 this.freeGameSpin();

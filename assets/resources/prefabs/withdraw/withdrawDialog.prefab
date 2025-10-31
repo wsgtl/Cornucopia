@@ -3756,7 +3756,7 @@
         "__id__": 162
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 240
@@ -4461,7 +4461,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "16k7ZIDiJKfZ4abcbHmfkx"
+    "fileId": "62SEK9xD9KlpkFStf3XwqU"
   },
   {
     "__type__": "cc.Sprite",
@@ -4506,7 +4506,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "f0QT6CBzBKroyKU+Kq4MOY"
+    "fileId": "dbM2QfFYJDZKASMWkaSuBW"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -4516,7 +4516,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "73DKRxUh9PA7RT2roRTA6u",
+    "fileId": "052d+vZFNHwoY4ACFkMWUW",
     "instance": null,
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
@@ -4597,7 +4597,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "e5UoGrL2ZPuJEZRAM/cIh4"
+    "fileId": "86EzG8eJpKY4OeHhpGWSl/"
   },
   {
     "__type__": "cc.Sprite",
@@ -4642,7 +4642,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "2bwDVvp/ZD66jlF+WxQdLb"
+    "fileId": "7fKYoQXRlKNKZCeuLNk0Bv"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -4652,7 +4652,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "9b9bqrzYFDqLuFQuhInGIA",
+    "fileId": "04pfOKVHNAPaP5zTOD9fyP",
     "instance": null,
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
@@ -4733,7 +4733,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "82rPew3FNKnaK8GpSQe/od"
+    "fileId": "90lCCuPUlOIKyjacZIJs11"
   },
   {
     "__type__": "cc.Sprite",
@@ -4778,7 +4778,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "7ec94pSXhHrpDFdJqT2n+Q"
+    "fileId": "6bSxEHQVJMYJ+qrYnMUC8o"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -4788,7 +4788,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "1fsA9ex7dHMq5LChdgT4jF",
+    "fileId": "a9P2A6OHtK9bwMLVoCCIih",
     "instance": null,
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
@@ -9407,6 +9407,7 @@
     "__type__": "def70eNTS5DS6b78pb/TGxw",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },

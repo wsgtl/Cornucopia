@@ -1,8 +1,8 @@
 密钥库别名:  key0
 密码:   jjccoo
 别名密码:    jjccoo
-游戏名：Jackpot Cornucopia
-包名：com.jackpot.cornucopiaii
+游戏名：Golden Cornucopia Slots
+包名：com.rewardslots.bigjackpot.riches
 max SDK key：
 激励广告位ID： 
 插屏广告位ID： 
@@ -17,3 +17,8 @@ https://play.google.com/store/apps/details?id=com.jackpot.cornucopiaii
 
 //生成output.zip秘钥
 java -jar E:\szhy\keystore/pepk.jar --keystore=key.jks --alias=key0 --output=output.zip --include-cert --rsa-aes-encryption --encryption-key-path=encryption_public_key.pem
+
+
+老
+游戏名：Jackpot Cornucopia
+包名：com.jackpot.cornucopiaii

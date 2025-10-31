@@ -242,7 +242,7 @@ export namespace WithdrawUtil {
       GoldReward: 0.2,//彩金
       LuckyDialog: 0.3,//宝箱
       Pig: 0.5,//猪
-      Win: 1,//大赢
+      Win: 1.5,//大赢
       Mini: 2,//mini
    }
 
