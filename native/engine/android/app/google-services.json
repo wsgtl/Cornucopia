@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "444595090699",
+    "project_id": "golden-cornucopia-slots",
+    "storage_bucket": "golden-cornucopia-slots.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444595090699:android:dc75158c3a7e69035e9e0e",
+        "android_client_info": {
+          "package_name": "com.rewardslots.bigjackpot.riches"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaVU_Sy1yhfQVAF5xui-gnBmuDvkOjOrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

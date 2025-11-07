@@ -19,6 +19,7 @@ export namespace GuideManger {
     export function passGameStep() {
         GameStorage.setGuideStep(1);
     }
+
     /**是否是新手引导 */
     export function isGuide() {
         const step = GameStorage.getGuideStep();

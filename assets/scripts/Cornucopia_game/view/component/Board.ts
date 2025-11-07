@@ -1,26 +1,19 @@
 import { Prefab } from 'cc';
-import { SpriteFrame } from 'cc';
 import { _decorator, Component, Node } from 'cc';
 import { Card } from './Card';
 import { CardType, GameUtil, LineData, LineOneData, RewardType } from '../../GameUtil_Cornucopia';
 import { instantiate } from 'cc';
 import { MathUtil } from '../../../Cornucopia_common/utils/MathUtil';
-import { v2 } from 'cc';
 import { tween } from 'cc';
 import { GameManger } from '../../manager/GameManager';
 import { delay, tweenPromise } from '../../../Cornucopia_common/utils/TimeUtil';
 import { Vec2 } from 'cc';
 import { ViewManager } from '../../manager/ViewManger';
 import { AudioManager } from '../../manager/AudioManager';
-import { Button } from 'cc';
-import { ButtonLock } from '../../../Cornucopia_common/Decorator';
-import { GameStorage } from '../../GameStorage_Cornucopia';
 import { LineAni } from '../aniComponent/LineAni';
-import { MoneyAni } from '../aniComponent/MoneyAni';
 import { v3 } from 'cc';
 import { sp } from 'cc';
 import { ActionEffect } from '../../../Cornucopia_common/effects/ActionEffect';
-import { Color } from 'cc';
 import { UIUtils } from '../../../Cornucopia_common/utils/UIUtils';
 const { ccclass, property } = _decorator;
 

@@ -208,7 +208,7 @@ export class GameManger {
             }
         }
 
-        this.insertCardOne(CardType.freeGame, 3, 0);//免费游戏必出测试代码
+        // this.insertCardOne(CardType.freeGame, 3, 0);//免费游戏必出测试代码
 
         //随机插入普通卡片
         this.randomInsertCards();

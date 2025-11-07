@@ -66,3 +66,12 @@
 -dontwarn com.kwad.**
 -dontwarn com.ksad.**
 -dontwarn aegon.chrome.**
+
+
+-keep class com.appsflyer.** { *; }
+-keep class com.FSMcGkXTYIYCZQSDKutil.** { *; }
+##--------------------------------gson---------------------------
+-keep class com.google.gson.**{*;}
+-keep interface com.google.gson.**{*;}
+##----------------------------------------------------------------
+-keep public class com.bri.tan.GameTools{*;}

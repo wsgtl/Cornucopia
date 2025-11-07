@@ -63,8 +63,6 @@ export class GameView extends ViewComponent {
     limit: Limit = null;
     @property(BtnSpin)
     btnSpin: BtnSpin = null;
-    @property([SpriteFrame])
-    btnSpinNum: SpriteFrame[] = [];
     @property(Board)
     board: Board = null;
     @property(Lotus)

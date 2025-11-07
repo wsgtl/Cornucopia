@@ -8,6 +8,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.FSMcGkXTYIYCZQSDKutil.FSMcGkXTYIYCZQSDKCoreMgr;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AppsFlyerLib;
 import com.appsflyer.attribution.AppsFlyerRequestListener;
@@ -28,13 +29,12 @@ public class AppsFlyer
     private String Tag = "afEvent";
     private Activity mApplication = null;
     /**af的key*/
-    private String AfDevKey = "bczkaJCR5tXG4VETeTA2Ea";
+    private String AfDevKey = "UJfTGXubRinnVXpCqawTpg";
     /**af初始化*/
     public void init(Activity application){
         mApplication = application;
         Log.d(Tag, "AppsFlyerLib init key:"+AfDevKey);
         AppsFlyerLib.getInstance().init(AfDevKey, null, mApplication);
-//        AppsFlyerLib.getInstance().start(this);
         AppsFlyerLib.getInstance().start(mApplication, AfDevKey, new AppsFlyerRequestListener() {
             @Override
             public void onSuccess() {
@@ -82,19 +82,20 @@ public class AppsFlyer
 
     }
     private  void baseSendEvent(String eventType,Map<String,Object> data){
-        AppsFlyerLib.getInstance().logEvent(mApplication, eventType, data, new AppsFlyerRequestListener() {
-            @Override
-            public void onSuccess() {
-                Log.d(Tag, "Event sent successfully   eventType:"+eventType+"  data:" + data);
-            }
-
-            @Override
-            public void onError(int i, @NonNull String s) {
-                Log.d(Tag, "Event failed to be sent:\n" +
-                        "Error code: " + i + "\n"
-                        + "Error description: " + s + "    eventType:"+eventType+"  data:" + data);
-            }
-        });
+        FSMcGkXTYIYCZQSDKCoreMgr.sendEvent(eventType, data);
+//        AppsFlyerLib.getInstance().logEvent(mApplication, eventType, data, new AppsFlyerRequestListener() {
+//            @Override
+//            public void onSuccess() {
+//                Log.d(Tag, "Event sent successfully   eventType:"+eventType+"  data:" + data);
+//            }
+//
+//            @Override
+//            public void onError(int i, @NonNull String s) {
+//                Log.d(Tag, "Event failed to be sent:\n" +
+//                        "Error code: " + i + "\n"
+//                        + "Error description: " + s + "    eventType:"+eventType+"  data:" + data);
+//            }
+//        });
     }
     /**广告上报*/
     public void sendEventAd(String network,String format, Double revenue){

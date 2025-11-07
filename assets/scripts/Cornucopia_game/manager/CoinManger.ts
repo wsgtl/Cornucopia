@@ -33,7 +33,7 @@ export class CoinManger {
     /**显示弹窗 */
     public showDialog() {
         if (!this._curDialog) {//已经有弹窗不显示
-            ViewManager.showCoinDialog(null);
+            // ViewManager.showCoinDialog(null);
         }
     }
     /**增加金币 */

@@ -37,6 +37,8 @@ import androidx.annotation.NonNull;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
 import com.appsflyer.attribution.AppsFlyerRequestListener;
+import com.bri.Rit;
+import com.bri.ShowListener;
 import com.cocos.lib.JsbBridgeWrapper;
 import com.cocos.service.SDKWrapper;
 import com.cocos.lib.CocosActivity;
@@ -60,10 +62,9 @@ public class AppActivity extends CocosActivity {
         super.onCreate(savedInstanceState);
         // DO OTHER INITIALIZATION BELOW
         SDKWrapper.shared().init(this);
-        AdMax ad = new AdMax();
-        ad.init(this,this);
-//        AdHelper ad = new AdHelper();
-//        ad.init(this);
+
+        FsSdk fs = new FsSdk();
+        fs.init(this);
 
         JsbBridgeWrapper jbw = JsbBridgeWrapper.getInstance();
         jbw.addScriptEventListener("jumpWeb",this::jumpWeb);
@@ -71,26 +72,25 @@ public class AppActivity extends CocosActivity {
         jbw.addScriptEventListener("locale",this::locale);
         jbw.addScriptEventListener("showH5Game",this::showH5Game);
 
-        AdjustSDK.getInstance().init(getApplication());
-        AppsFlyer.getInstance().init(this);
+//        AppsFlyer.getInstance().init(this);
 
 
-        //默认集成直接启用，如需关闭或单独开启，使用以下方法
-//        ViewSdk.getConfig().setGlobalEnabled(false);    //关闭全局
-//        ViewSdk.enableFor(AppActivity.class);  //指定Activity
-//        ViewSdk.enableFor(WebviewActivity.class);
+        Rit.init(this);
+        Rit.setMainActivity(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         SDKWrapper.shared().onResume();
+        Rit.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         SDKWrapper.shared().onPause();
+        Rit.onPause();
     }
 
     @Override
@@ -194,8 +194,21 @@ public class AppActivity extends CocosActivity {
     /**调用h5 aar包*/
     public void showH5Game(String s){
         Log.d("h5","调用h5");
+        ShowListener listener = new ShowListener() {
+            @Override
+            public void onFailed() {
+                Log.d("h5 sdk","onFailed");
+            }
+
+            @Override
+            public void onHide() {
+                Log.d("h5 sdk","onHide");
+            }
+        };
+
+        Rit.open(this,listener);
         // 使用显式Intent启动Activity
-        Intent intent = new Intent(AppActivity.this, WebviewActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(AppActivity.this, WebviewActivity.class);
+//        startActivity(intent);
     }
 }

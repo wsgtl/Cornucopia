@@ -9,6 +9,7 @@ import { AudioStorage } from './Cornucopia_common/localStorage/AudioStorage';
 import { LangStorage } from './Cornucopia_common/localStorage/LangStorage';
 import { EnergyManger } from './Cornucopia_game/manager/EnergyManager';
 import { JackpotManger } from './Cornucopia_game/manager/JackpotManager';
+import { WithdrawStorage } from './Cornucopia_game/view/withdraw/WithdrawStorage';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameLaunch')
@@ -43,6 +44,7 @@ export class GameLaunch extends Component {
         AudioManager.setBgmNode(this.bgmNode);
         AudioStorage.init();
         JackpotManger.init();
+        WithdrawStorage.init();
         EnergyManger.calEnergy();
         i18n.loadLang();//加载多语言
 

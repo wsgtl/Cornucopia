@@ -24,11 +24,11 @@ export class Lotus extends Component {
 
     protected onLoad(): void {
         this.showProgress(false);
-        this.node.on(Node.EventType.TOUCH_START, () => {
-            ViewManager.showGoldRewardChange(() => {
+        // this.node.on(Node.EventType.TOUCH_START, () => {
+        //     ViewManager.showGoldRewardChange(() => {
                 
-            })
-        })
+        //     })
+        // })
         ActionEffect.skAniOnce(this.sk,"",true);
         this.sk.timeScale=10000;
         this.sk.setToSetupPose();
