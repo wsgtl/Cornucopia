@@ -41,23 +41,23 @@ export namespace EventTracking {
 
     }
 
-    const key1 = ITEM_STORAGE.EventTracking;
-    export function setCoinEvent(num: number) {
-        const arr = getCoinEvent();
-        arr.push(num);
-        BaseStorageNS.setItem(key1, JSON.stringify(arr));
-    }
+    // const key1 = ITEM_STORAGE.EventTracking;
+    // export function setCoinEvent(num: number) {
+    //     const arr = getCoinEvent();
+    //     arr.push(num);
+    //     BaseStorageNS.setItem(key1, JSON.stringify(arr));
+    // }
 
-    export function getCoinEvent(): number[] {
-        const item = BaseStorageNS.getItem(key1);
-        let arr: number[];
-        if (item) {
-            arr = JSON.parse(item);
-        }
-        return arr ?? [];
-    }
+    // export function getCoinEvent(): number[] {
+    //     const item = BaseStorageNS.getItem(key1);
+    //     let arr: number[];
+    //     if (item) {
+    //         arr = JSON.parse(item);
+    //     }
+    //     return arr ?? [];
+    // }
 
-    const CoinEvent = [100, 150, 200, 250, 300, 400, 550, 700, 880, 1000];
+    // const CoinEvent = [100, 150, 200, 250, 300, 400, 550, 700, 880, 1000];
 
 
     /**上报事件 */
@@ -89,6 +89,8 @@ export namespace EventTracking {
             startFreeGame: 0,
             /**点击再来一次免费游戏 */
             againFreeGame: 0,
+            /**到多少美元 */
+            toMoney: [],
         }
 
     }
@@ -131,5 +133,20 @@ export namespace EventTracking {
     export function sendEventOrderSpeedUp(name: string) {
         sendEvent({ event_type: "order_speedup_" + name })
     }
-
+    const moneys = [200, 300, 400, 450, 490];
+    /**上报多少美元 */
+    export function sendEventMoney(n: number) {
+        const rate = LangStorage.getData().rate;
+        const tm = _eventData.one.toMoney;
+        moneys.forEach((v, i) => {
+            if (v * rate <= n) {
+                if (tm[i] != 1) {
+                    tm[i] = 1;
+                    saveLocal();
+                    console.log("到达美元:"+v);
+                    sendEvent({ event_type: "toMoney_" + v });
+                }
+            }
+        })
+    }
 }

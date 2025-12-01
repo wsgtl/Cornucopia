@@ -7,6 +7,7 @@ import { MoneyManger } from '../../manager/MoneyManger';
 import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
 import { NumFont } from '../../../Cornucopia_common/ui/NumFont';
 import { FormatUtil } from '../../../Cornucopia_common/utils/FormatUtil';
+import { ConfigConst } from '../../manager/ConfigConstManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('OrderItem')
@@ -72,7 +73,7 @@ export class OrderItem extends Component {
     onBtnQueue() {
         const q = this.curOrder.queue;
         let data: QueueControl;
-        for (let d of WithdrawUtil.QueueControlData) {
+        for (let d of ConfigConst.QueueControlData) {
             if (q >= d.left) {
                 data = d;
                 break;
@@ -97,7 +98,7 @@ export class OrderItem extends Component {
         const cur = WithdrawUtil.getCurSecond();
         const q = Math.floor((this.curOrder.waitTime - cur) / 60);
         let data: WaitControl;
-        for (let d of WithdrawUtil.WaitControlData) {
+        for (let d of ConfigConst.WaitControlData) {
             if (q >= d.left) {
                 data = d;
                 break;

@@ -44,8 +44,8 @@ export class BtnSpin extends Component {
         this.node.off(Node.EventType.TOUCH_END, this.onTouchEnd, this);
         this.node.off(Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this);
     }
-    setSpin(status:boolean=false) {
-        status&&(this.status = 0);
+    setSpin(status: boolean = false) {
+        status && (this.status = 0);
         this.node.getComponent(Sprite).spriteFrame = this.sf[0];
         this.spin.active = true;
         this.stop.active = false;
@@ -89,24 +89,27 @@ export class BtnSpin extends Component {
     private changeAuto: boolean = false;
     private onTouchStart() {
         if (this.isFreeGame) return;
+        if (this.strHold.grayscale) return;
         if (this.status == 0) {
 
             // this.time = Date.now();
-            if (!this.guideCb)
-                delay(1, this.stop).then(() => {
+            if (!this.guideCb) {
+                delay(1, this.spin).then(() => {
                     this.status = 1;
                     this.spinCb();
                     this.setAuto();
                     this.changeAuto = true;
-                    AudioManager.vibrate(100,100);
+                    AudioManager.vibrate(100, 100);
                 })
+            }
+
             this.scale(true);
         } else if (this.status == 1) {
             this.scale(true);
         }
     }
     private onTouchEnd() {
-        Tween.stopAllByTarget(this.stop);
+        Tween.stopAllByTarget(this.spin);
         if (this.guideCb) {//新手引导
             this.guideCb?.();
             this.spinCb();
@@ -115,6 +118,7 @@ export class BtnSpin extends Component {
             return;
         }
         if (this.isFreeGame) return;
+        if (this.strHold.grayscale) return;
         if (this.status == 0) {
             // const duration = Date.now() - this.time;
             // if (duration > 700) {//长按

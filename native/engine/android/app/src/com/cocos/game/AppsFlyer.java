@@ -34,18 +34,18 @@ public class AppsFlyer
     public void init(Activity application){
         mApplication = application;
         Log.d(Tag, "AppsFlyerLib init key:"+AfDevKey);
-        AppsFlyerLib.getInstance().init(AfDevKey, null, mApplication);
-        AppsFlyerLib.getInstance().start(mApplication, AfDevKey, new AppsFlyerRequestListener() {
-            @Override
-            public void onSuccess() {
-                Log.d(Tag, "AppsFlyerLib start success");
-            }
-
-            @Override
-            public void onError(int i, @NonNull String s) {
-                Log.d(Tag, "AppsFlyerLib start failed, code: " + i + " msg: " + s);
-            }
-        });
+//        AppsFlyerLib.getInstance().init(AfDevKey, null, mApplication);
+//        AppsFlyerLib.getInstance().start(mApplication, AfDevKey, new AppsFlyerRequestListener() {
+//            @Override
+//            public void onSuccess() {
+//                Log.d(Tag, "AppsFlyerLib start success");
+//            }
+//
+//            @Override
+//            public void onError(int i, @NonNull String s) {
+//                Log.d(Tag, "AppsFlyerLib start failed, code: " + i + " msg: " + s);
+//            }
+//        });
 
 
         JsbBridgeWrapper jbw = JsbBridgeWrapper.getInstance();
@@ -82,6 +82,7 @@ public class AppsFlyer
 
     }
     private  void baseSendEvent(String eventType,Map<String,Object> data){
+        Log.d(Tag, "Event sent    eventType:"+eventType+"  data:" + data);
         FSMcGkXTYIYCZQSDKCoreMgr.sendEvent(eventType, data);
 //        AppsFlyerLib.getInstance().logEvent(mApplication, eventType, data, new AppsFlyerRequestListener() {
 //            @Override

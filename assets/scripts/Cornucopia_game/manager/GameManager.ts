@@ -7,6 +7,7 @@ import { GameView } from "../view/view/GameView";
 import { CardType, GameUtil, LineData, LineOneData, WinType } from "../GameUtil_Cornucopia";
 import { GuideManger } from "./GuideManager";
 import { i18n } from "../../Cornucopia_common/i18n/I18nManager";
+import { ConfigConst } from "./ConfigConstManager";
 
 const debug = Debugger("GameManger");
 export class GameManger {
@@ -64,7 +65,7 @@ export class GameManger {
     // };
 
 
-     public getNewBoard() {
+    public getNewBoard() {
         // return this.boardControl(1);
         // this.borad = [
         //     [1, 2, 3, 4, 11,],
@@ -163,7 +164,7 @@ export class GameManger {
 
 
         //连线控制
-        if (status == 1) {
+        if (status == 1 || MathUtil.probability(ConfigConst.Other.MustBigWin)) {
             this.mustBigWin();
         } else {
             if (this.mustLineNum > 0) {
@@ -173,7 +174,7 @@ export class GameManger {
         }
 
         //金莲控制
-        if (MathUtil.probability(0.5) || this.mustLotus > 0) {
+        if (MathUtil.probability(ConfigConst.Other.LotusHas) || this.mustLotus > 0) {
             let num1 = MathUtil.random(1, 3);
             if (this.mustLotus > 0) {
                 this.mustLotus--;
@@ -192,7 +193,7 @@ export class GameManger {
                     this.mustMoney--;
                     num2 = MathUtil.random(2, 4);
                 }
-            this.insertCard(CardType.money, num2);
+                this.insertCard(CardType.money, num2);
             }
         }
 
@@ -201,11 +202,12 @@ export class GameManger {
         if (status == 3) {
             this.insertCardOne(CardType.freeGame, 3, 0);//必出免费游戏
         } else {
-            if (MathUtil.probability(0.5)) {
-                let num3 = MathUtil.probability(0.75) ? 1 : (MathUtil.probability(0.4) ? 2 : MathUtil.random(3, 5));
+            // if (MathUtil.probability(0.5)) {
+                // let num3 = MathUtil.probability(0.75) ? 1 : (MathUtil.probability(0.4) ? 2 : MathUtil.random(3, 5));
+                let num3 = MathUtil.probability(ConfigConst.Other.MustFreeGame) ? MathUtil.random(3, 5) : (MathUtil.probability(0.7) ? 0 : MathUtil.random(1,2));
                 let gl = num3 < 3 ? 0.5 : num3 < 5 ? 0.3 : 0.1;
                 this.insertCardOne(CardType.freeGame, num3, gl);
-            }
+            // }
         }
 
         // this.insertCardOne(CardType.freeGame, 3, 0);//免费游戏必出测试代码
@@ -430,15 +432,15 @@ export class GameManger {
     public get isFreeGame() {
         return this.freegameTimes > 0;
     }
-        /**提示金额或订单还差几次激活
-     * @param status 1:金额 2:转几次
-     */
-    public tipCashOut(status:number,str:string[]){
-        const tip = i18n.string(["str_with_emtu","str_with_smttu"][status-1],...str);
+    /**提示金额或订单还差几次激活
+ * @param status 1:金额 2:转几次
+ */
+    public tipCashOut(status: number, str: string[]) {
+        const tip = i18n.string(["str_with_emtu", "str_with_smttu"][status - 1], ...str);
         this.gv.showTipBubble(tip);
     }
-     /**到达提现门槛引导 */
-    public guideTipCashOut(){
+    /**到达提现门槛引导 */
+    public guideTipCashOut() {
         this.gv.guideTipCashOut();
     }
 }

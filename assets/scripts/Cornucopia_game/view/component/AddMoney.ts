@@ -1,6 +1,7 @@
 import { _decorator, Component, Node } from 'cc';
 import { MoneyManger } from '../../manager/MoneyManger';
 import { CoinManger } from '../../manager/CoinManger';
+import { GameUtil } from '../../GameUtil_Cornucopia';
 const { ccclass, property } = _decorator;
 
 @ccclass('AddMoney')
@@ -14,7 +15,7 @@ export class AddMoney extends Component {
     @property(Node)
     subCoin: Node = null;
     protected onLoad(): void {
-        this.node.active = false;
+        this.node.active = GameUtil.IsTest;
     }
     start() {
         this.add.on(Node.EventType.TOUCH_START, () => {

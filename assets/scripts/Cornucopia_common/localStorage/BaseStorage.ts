@@ -8,7 +8,9 @@ export enum ITEM_STORAGE {
     Game = "Cornucopia_game",
     JACKPOT = "Cornucopia_jackpot",
     WAITWITHDRWW = "Cornucopia_waitwithdraw",
-    WAITWITHDRWWS = "Cornucopia_waitwithdraws"
+    WAITWITHDRWWS = "Cornucopia_waitwithdraws",
+    AbTest = "Match3_ab_test",
+    WebConfig = "Match3_web_config",
 }
 
 /**

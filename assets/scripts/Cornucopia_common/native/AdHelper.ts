@@ -5,6 +5,9 @@ import Debugger from "../Debugger";
 import { dragonBones } from "cc";
 import { delay } from "../utils/TimeUtil";
 import { NativeFun } from "./NativeFun";
+import { GameUtil } from "../../Cornucopia_game/GameUtil_Cornucopia";
+import { ConfigConst } from "../../Cornucopia_game/manager/ConfigConstManager";
+import { WithdrawUtil } from "../../Cornucopia_game/view/withdraw/WithdrawUtil";
 const debug = Debugger("AdHelper")
 
 export class AdHelper {
@@ -59,6 +62,10 @@ export class AdHelper {
     public showRewardVideo(placement:string,callback: CallableFunction, fail?: CallableFunction) {
         console.log("显示激励广告1")
         if (sys.platform === sys.Platform.ANDROID) {
+            if (GameUtil.IsTest) {//测试模式关闭广告
+                callback?.();
+                return;
+            }
             console.log("显示激励广告2")
             native.jsbBridgeWrapper.dispatchEventToNative("showRewardVideo","激励广告:"+placement);
             this._getRewardVideo = callback;
@@ -70,7 +77,7 @@ export class AdHelper {
             callback?.();
             // fail(1);
         }
-
+        WithdrawUtil.renewFree();
     }
     /**加载插屏广告 */
     public loadInterstitial() {
@@ -89,7 +96,8 @@ export class AdHelper {
     }
     private interTime = 0;
     /**限定次数弹插屏广告 */
-    public timesToShowInterstitial(t: number = 4) {
+    public timesToShowInterstitial(t: number = ConfigConst.Other.InterShowNum) {
+        WithdrawUtil.reduceFree();
         this.interTime++;
         if (this.interTime >= t) {
             this.interTime = 0;

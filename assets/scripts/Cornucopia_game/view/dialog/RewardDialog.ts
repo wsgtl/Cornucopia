@@ -23,6 +23,7 @@ import { LangStorage } from '../../../Cornucopia_common/localStorage/LangStorage
 import { FormatUtil } from '../../../Cornucopia_common/utils/FormatUtil';
 import { WithdrawUtil } from '../withdraw/WithdrawUtil';
 import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
+import { ConfigConst } from '../../manager/ConfigConstManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('RewardDialog')
@@ -59,8 +60,8 @@ export class RewardDialog extends DialogComponent {
         const data = LangStorage.getData();
         const isGuide = GuideManger.isGuide() && GameStorage.getMoney() < 5;
         // this.rewardNum = isGuide ? MoneyManger.instance.rate(GameUtil.GuideMoney) : MoneyManger.instance.getReward();
-        this.rewardNum = MoneyManger.instance.getReward(WithdrawUtil.MoneyBls.RewardFree);
-        this.rewardNumAd = MoneyManger.instance.getReward(WithdrawUtil.MoneyBls.RewardAd);
+        this.rewardNum = MoneyManger.instance.getReward(WithdrawUtil.calFreeBl());
+        this.rewardNumAd = MoneyManger.instance.getReward(ConfigConst.MoneyBls.RewardAd);
         this.num.aligning = 1;
         // this.num.num = data.symbol + " " + FormatUtil.toXXDXXxsd(this.rewardNum);
         // this.btnNum.num = data.symbol + " " + FormatUtil.toXXDXXxsd(this.rewardNum * this.reciveNum);

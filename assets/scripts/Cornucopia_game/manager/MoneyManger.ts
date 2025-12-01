@@ -12,6 +12,7 @@ import { MoneyControl, WithdrawUtil } from "../view/withdraw/WithdrawUtil";
 import { GameManger } from "./GameManager";
 import { FormatUtil } from "../../Cornucopia_common/utils/FormatUtil";
 import { WithdrawStorage } from "../view/withdraw/WithdrawStorage";
+import { ConfigConst } from "./ConfigConstManager";
 
 export class MoneyManger {
     public static _instance: MoneyManger = null;
@@ -64,6 +65,7 @@ export class MoneyManger {
             const sy = m-curMoney;
             GameManger.instance.tipCashOut(1,[FormatUtil.toMoneyLabel(sy),FormatUtil.toMoneyLabel(m)]);
         }   
+        EventTracking.sendEventMoney(curMoney);
     }
     public showNum(num: number) {
         if (isVaild(this._curMoney)) {
@@ -110,7 +112,7 @@ export class MoneyManger {
         const cur = GameStorage.getMoney();
         const rate = LangStorage.getData().rate;
         let data: MoneyControl;
-        for (let n of WithdrawUtil.MoneyControlData) {
+        for (let n of ConfigConst.MoneyControlData) {
             if (n.right * rate > cur) {
                 data = n;
                 break;

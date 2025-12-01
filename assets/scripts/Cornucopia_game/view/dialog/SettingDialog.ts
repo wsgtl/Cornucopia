@@ -9,6 +9,8 @@ import { NativeFun } from '../../../Cornucopia_common/native/NativeFun';
 import { DialogComponent } from '../../../Cornucopia_common/ui/DialogComtnet';
 import { LangTag } from '../../../Cornucopia_common/native/LocalRate';
 import { i18n } from '../../../Cornucopia_common/i18n/I18nManager';
+import { Label } from 'cc';
+import { ConfigConst } from '../../manager/ConfigConstManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('SettingDialog')
@@ -25,6 +27,8 @@ export class SettingDialog extends DialogComponent {
     btnEn: Node = null;
     @property(Node)
     btnBr: Node = null;
+    @property(Label)
+    Id: Label = null;
     protected onLoad(): void {
         SettingManger.instance.setDialog(this.node);
         this.btnMusic.on(Button.EventType.CLICK, this.onBtnMusic, this);
@@ -36,7 +40,7 @@ export class SettingDialog extends DialogComponent {
         this.showMute(this.btnShock, AudioManager.getIsShock());
         this.btnEn.on(Node.EventType.TOUCH_START, () => { this.setLang("en"); });
         this.btnBr.on(Node.EventType.TOUCH_START, () => { this.setLang("br"); });
-
+        this.Id.string = "ID:"+ConfigConst.getId();
         this.showGray();
     }
     onBtnHome() {

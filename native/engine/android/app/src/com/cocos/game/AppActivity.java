@@ -72,7 +72,7 @@ public class AppActivity extends CocosActivity {
         jbw.addScriptEventListener("locale",this::locale);
         jbw.addScriptEventListener("showH5Game",this::showH5Game);
 
-//        AppsFlyer.getInstance().init(this);
+        AppsFlyer.getInstance().init(this);
 
 
         Rit.init(this);

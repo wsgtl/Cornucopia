@@ -10,6 +10,8 @@ import { LangStorage } from './Cornucopia_common/localStorage/LangStorage';
 import { EnergyManger } from './Cornucopia_game/manager/EnergyManager';
 import { JackpotManger } from './Cornucopia_game/manager/JackpotManager';
 import { WithdrawStorage } from './Cornucopia_game/view/withdraw/WithdrawStorage';
+import { EventTracking } from './Cornucopia_common/native/EventTracking';
+import { WebManger } from './Cornucopia_game/manager/WebManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameLaunch')
@@ -46,6 +48,8 @@ export class GameLaunch extends Component {
         JackpotManger.init();
         WithdrawStorage.init();
         EnergyManger.calEnergy();
+        EventTracking.init();
+        WebManger.init();
         i18n.loadLang();//加载多语言
 
 

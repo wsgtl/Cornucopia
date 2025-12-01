@@ -17,7 +17,7 @@ export class Energy extends Component {
 
     protected onLoad(): void {
         this.node.on(Node.EventType.TOUCH_START,()=>{
-            ViewManager.showEnergyDialog()
+            ViewManager.showEnergyDialog(()=>{});
         })
         this.showNum();
         this.updateTime();

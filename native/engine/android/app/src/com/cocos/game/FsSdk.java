@@ -110,6 +110,7 @@
              public void onDisplayed() {
                  gamePause();
                  Log.d(Tag, "main inter onDisplayed!!!");
+                 AppsFlyer.getInstance().sendAdShownEvent(AppsFlyer.getCurrentAdPlacement(),AppsFlyer.getCurrentAdType());
              }
              @Override
              public void onClick() {
@@ -154,6 +155,7 @@
              public void onDisplayed() {
                  gamePause();
                  Log.d(Tag, "main reward onDisplayed!!!");
+                 AppsFlyer.getInstance().sendAdShownEvent(AppsFlyer.getCurrentAdPlacement(),AppsFlyer.getCurrentAdType());
              }
              @Override
              public void onClick() {

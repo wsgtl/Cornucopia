@@ -1,12 +1,13 @@
 import { FormatUtil } from "../../Cornucopia_common/utils/FormatUtil";
 import { GameStorage } from "../GameStorage_Cornucopia";
+import { ConfigConst } from "./ConfigConstManager";
 import { GameManger } from "./GameManager";
 import { Node } from 'cc';
 
 /**体力管理 */
 export namespace EnergyManger {
     /**体力刷新秒数 */
-    export const duration: number = 120;
+    // export const duration: number = 120;
     /**体力值上限 */
     export const max: number = 50;
     /**每次加体力值 */
@@ -27,7 +28,7 @@ export namespace EnergyManger {
     export function calEnergy() {
         const energy = GameStorage.getEnergy();
         const cur = getCurSecond();
-        const num = Math.max(0, Math.floor((cur - energy.time) / duration));
+        const num = Math.max(0, Math.floor((cur - energy.time) / ConfigConst.Other.EnergyDuration));
         const value = Math.min(max, energy.energy + num);
         GameStorage.setEnergy(value);
         GameStorage.setEnergyTime(cur);
@@ -74,7 +75,7 @@ export namespace EnergyManger {
         let t = 0;
         if (e.energy < max) {
             const cur = getCurSecond();
-            t = duration - (cur - e.time);
+            t = ConfigConst.Other.EnergyDuration - (cur - e.time);
             if (t <= 0) {
                 GameStorage.setEnergy(e.energy + 1);//加体力
                 GameStorage.setEnergyTime(cur);

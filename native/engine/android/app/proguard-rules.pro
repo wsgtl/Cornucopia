@@ -74,4 +74,19 @@
 -keep class com.google.gson.**{*;}
 -keep interface com.google.gson.**{*;}
 ##----------------------------------------------------------------
--keep public class com.bri.tan.GameTools{*;}
+#-keep public class com.bri.tan.GameTools{*;}
+
+#### 移除所有日志
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+    public static *** w(...);
+    public static *** e(...);
+}
+
+# 移除System.out打印
+-assumenosideeffects class java.io.PrintStream {
+    public void println(...);
+    public void print(...);
+}

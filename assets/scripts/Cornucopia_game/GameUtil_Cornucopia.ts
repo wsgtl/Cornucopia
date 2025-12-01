@@ -97,6 +97,8 @@ export type LineData = {
 // }
 
 export namespace GameUtil {
+   /**是否是测试模式 */
+   export const IsTest: boolean = false;
    export const CardW: number = 204;//卡牌宽
    export const CardH: number = 198;//卡牌高
    export const AllRow: number = 3;//行数
@@ -321,7 +323,10 @@ export namespace GameUtil {
          [0, 1, 1, 1, 0],
       ]
    ];
-
+   /**获取随机ID */
+   export function gerRandomId(){
+      return MathUtil.random(100000, 999999);
+   }
 }
 
 

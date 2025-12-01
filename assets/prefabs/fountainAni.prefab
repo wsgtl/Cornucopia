@@ -264,6 +264,8 @@
     "__prefab": {
       "__id__": 9
     },
+    "all": 13,
+    "oneTime": 0.02,
     "_id": ""
   },
   {
@@ -573,6 +575,7 @@
         "__expectedType__": "cc.SpriteFrame"
       }
     ],
+    "isMain": false,
     "_id": ""
   },
   {

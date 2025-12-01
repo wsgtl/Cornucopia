@@ -9,6 +9,7 @@ import { tween } from 'cc';
 import { v3 } from 'cc';
 import { GameManger } from '../../manager/GameManager';
 import { i18n } from '../../../Cornucopia_common/i18n/I18nManager';
+import { ConfigConst } from '../../manager/ConfigConstManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('BtnGift')
@@ -21,7 +22,6 @@ export class BtnGift extends Component {
     hand: Node = null;
     public curTime = 0;
     start() {
-        // this.curTime = GameStorage.getPig().pigTime;
         this.node.on(Button.EventType.CLICK, () => {
             if(this.curTime>0)return;
             if(GameManger.instance.isAni){
@@ -30,7 +30,7 @@ export class BtnGift extends Component {
             }
             
             ViewManager.showLuckyGiftDialog(()=>{
-                this.curTime = 120;
+                this.curTime = ConfigConst.Other.GetMoneyTime;
             })
         })
         this.showTime();

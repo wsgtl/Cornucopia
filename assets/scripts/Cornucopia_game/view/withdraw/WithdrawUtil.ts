@@ -8,6 +8,7 @@ import { LangStorage } from "../../../Cornucopia_common/localStorage/LangStorage
 import { EventTracking } from "../../../Cornucopia_common/native/EventTracking";
 import { FormatUtil } from "../../../Cornucopia_common/utils/FormatUtil";
 import { MathUtil } from "../../../Cornucopia_common/utils/MathUtil";
+import { ConfigConst } from "../../manager/ConfigConstManager";
 
 
 /**提现卡类型 */
@@ -42,20 +43,16 @@ export type WaitControl = {
 export namespace WithdrawUtil {
    /**激活订单需要玩多少次 */
    export const ActivatePlay: number = 100;
-   // export const ActivatePlay: number = 10;
    /**激活订单限定时间 单位：秒*/
    export const ActivateTimes: number = 28 * 60 * 60;
-   // export const ActivateTimes: number = 10;
    /**等待订单处理时间 单位：秒*/
    export const WaitTimes: number = 15 * 24 * 60 * 60;
    /**订单失败返回金额比例 */
    export const BackMoney: number = 1.2;
    /**每次玩老虎机增加点数 */
    export const AddPoints: number = 18;
-   // export const AddPoints: number = 1000;
    /**每次前进排名 */
    export const OneQueue: number = 10;
-   // export const OneQueue: number = 100;
    /**每次前进分钟数 */
    export const OneWait: number = 100;
    /**钱提现金额 */
@@ -96,7 +93,7 @@ export namespace WithdrawUtil {
          for (let i = order.inactive.length - 1; i >= 0; i--) {
             const a = order.inactive[i];
             a.playTimes += 1;
-            const _sy = ActivatePlay - a.playTimes;
+            const _sy = ConfigConst.Other.ActivatePlay - a.playTimes;
             if (_sy > 0) {//计算还剩几次转动可提现
                if (!mo) {
                   sy = _sy;
@@ -108,7 +105,7 @@ export namespace WithdrawUtil {
                   }
                }
             }
-            if (a.playTimes >= ActivatePlay && t <= a.canActivateTime) {
+            if (a.playTimes >= ConfigConst.Other.ActivatePlay && t <= a.canActivateTime) {
                order.inactive.splice(i, 1);//激活订单
                order.activated.push(a);
                a.activateTime = t;
@@ -195,6 +192,20 @@ export namespace WithdrawUtil {
    export function orderFial(order: OrderData) {
       order.status = 3;
    }
+   let reduceFreeNum = 0;
+   /**跳过广告降低免费广告比例 */
+   export function reduceFree() {
+      reduceFreeNum++;
+   }
+   /**观看广告恢复免费广告比例 */
+   export function renewFree() {
+      reduceFreeNum = 0;
+   }
+   /**计算免费广告比例 */
+   export function calFreeBl() {
+      const bls = ConfigConst.MoneyBls;
+      return Math.max(bls.RewardFree - bls.ReduceFree * reduceFreeNum, bls.MiniRewardFree);
+   }
 
    /**钱控制数据 */
    export const MoneyControlData: MoneyControl[] = [
@@ -244,6 +255,8 @@ export namespace WithdrawUtil {
       Pig: 0.5,//猪
       Win: 1.5,//大赢
       Mini: 2,//mini
+      MiniRewardFree: 0.1,//免费领取最低比例
+      ReduceFree: 0.05,//每次跳过广告免费领取降低比例
    }
 
    /**排队消耗数据 */

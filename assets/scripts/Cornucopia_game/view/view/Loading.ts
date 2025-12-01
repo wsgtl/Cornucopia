@@ -16,6 +16,7 @@ import { UIUtils } from '../../../Cornucopia_common/utils/UIUtils';
 import { v3 } from 'cc';
 import { WithdrawUtil } from '../withdraw/WithdrawUtil';
 import { EventTracking } from '../../../Cornucopia_common/native/EventTracking';
+import { WebManger } from '../../manager/WebManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('Loading')
@@ -34,6 +35,7 @@ export class Loading extends ViewComponent {
     qq: Node = null;
 
     async showProgress() {
+        const pro = WebManger.getData();
         const all = sys.platform === sys.Platform.ANDROID ? 150 : 30;
         for (let i = 0; i <= all; i++) {
             this.progress.progress = i / all;
@@ -41,6 +43,9 @@ export class Loading extends ViewComponent {
             if (this.qq) this.qq.angle -= 10;
             if (this.num) this.num.num = num + "%";
             if (this.loading) this.loading.string = "Loading... " + num + "%";
+            if (i == all - 1) {
+                await pro;
+            }
             if (i == all) {
                 this.scheduleOnce(() => {
                     // ViewManager.showHome();

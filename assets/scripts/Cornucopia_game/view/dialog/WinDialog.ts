@@ -18,6 +18,7 @@ import { GameStorage } from '../../GameStorage_Cornucopia';
 import { RewardData, RewardType } from '../../GameUtil_Cornucopia';
 import { ViewManager } from '../../manager/ViewManger';
 import { WithdrawUtil } from '../withdraw/WithdrawUtil';
+import { ConfigConst } from '../../manager/ConfigConstManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('WinDialog')
@@ -192,7 +193,7 @@ export class WinDialog extends DialogComponent {
     init() {
         for (let i = 0; i < 6; i++) {
             const index = MathUtil.random(1, 3);
-            const num = MoneyManger.instance.getReward(index / 3 * WithdrawUtil.MoneyBls.Win);
+            const num = MoneyManger.instance.getReward(index / 3 * ConfigConst.MoneyBls.Win);
             const rd: RewardData = { type: RewardType.money, num };
             this.rds[i] = rd;
             const it = instantiate(this.item);
