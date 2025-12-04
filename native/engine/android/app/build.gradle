@@ -29,8 +29,8 @@ android {
         applicationId APPLICATION_ID
         minSdkVersion PROP_MIN_SDK_VERSION
         targetSdkVersion PROP_TARGET_SDK_VERSION
-        versionCode 6
-        versionName "1.0.5"
+        versionCode 7
+        versionName "1.0.6"
 
         externalNativeBuild {
             cmake {
@@ -141,9 +141,10 @@ dependencies {
     //h5 sdk
 //    implementation 'com.github.megatronking.stringfog:xor:5.0.0'
 //    implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
-    implementation 'com.android.installreferrer:installreferrer:2.2'
+//    implementation 'com.android.installreferrer:installreferrer:2.2'
     // 请注意保持与主包版本同步更新
 //    implementation 'com.google.code.gson:gson:2.8.6'
+
 
 
 

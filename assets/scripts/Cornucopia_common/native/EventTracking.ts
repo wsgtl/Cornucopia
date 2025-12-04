@@ -91,6 +91,13 @@ export namespace EventTracking {
             againFreeGame: 0,
             /**到多少美元 */
             toMoney: [],
+        },
+        /**广告次数 */
+        ad: {
+            /**激励视频 */
+            reward: 0,
+            /**插屏广告 */
+            inter: 0,
         }
 
     }
@@ -143,10 +150,20 @@ export namespace EventTracking {
                 if (tm[i] != 1) {
                     tm[i] = 1;
                     saveLocal();
-                    console.log("到达美元:"+v);
-                    sendEvent({ event_type: "toMoney_" + v });
+                    console.log("到达美元:" + v + "_reward_" + _eventData.ad.reward + "_inter_" + _eventData.ad.inter);
+                    sendEvent({ event_type: "toMoney_" + v + "_reward_" + _eventData.ad.reward + "_inter_" + _eventData.ad.inter });
                 }
             }
         })
+    }
+    /**增加视频广告 */
+    export function addReward() {
+        _eventData.ad.reward++;
+        saveLocal();
+    }
+    /**增加插屏广告 */
+    export function addInter() {
+        _eventData.ad.inter++;
+        saveLocal();
     }
 }

@@ -37,8 +37,9 @@ import androidx.annotation.NonNull;
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
 import com.appsflyer.attribution.AppsFlyerRequestListener;
-import com.bri.Rit;
-import com.bri.ShowListener;
+//import com.bri.Rit;
+//import com.bri.ShowListener;
+import com.chuangxiang.track.CXStart;
 import com.cocos.lib.JsbBridgeWrapper;
 import com.cocos.service.SDKWrapper;
 import com.cocos.lib.CocosActivity;
@@ -75,22 +76,23 @@ public class AppActivity extends CocosActivity {
         AppsFlyer.getInstance().init(this);
 
 
-        Rit.init(this);
-        Rit.setMainActivity(this);
+        CXStart.init(this, getPackageName());
+//        Rit.init(this);
+//        Rit.setMainActivity(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         SDKWrapper.shared().onResume();
-        Rit.onResume();
+//        Rit.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         SDKWrapper.shared().onPause();
-        Rit.onPause();
+//        Rit.onPause();
     }
 
     @Override
@@ -194,19 +196,20 @@ public class AppActivity extends CocosActivity {
     /**调用h5 aar包*/
     public void showH5Game(String s){
         Log.d("h5","调用h5");
-        ShowListener listener = new ShowListener() {
-            @Override
-            public void onFailed() {
-                Log.d("h5 sdk","onFailed");
-            }
+//        ShowListener listener = new ShowListener() {
+//            @Override
+//            public void onFailed() {
+//                Log.d("h5 sdk","onFailed");
+//            }
+//
+//            @Override
+//            public void onHide() {
+//                Log.d("h5 sdk","onHide");
+//            }
+//        };
+//
+//        Rit.open(this,listener);
 
-            @Override
-            public void onHide() {
-                Log.d("h5 sdk","onHide");
-            }
-        };
-
-        Rit.open(this,listener);
         // 使用显式Intent启动Activity
 //        Intent intent = new Intent(AppActivity.this, WebviewActivity.class);
 //        startActivity(intent);
