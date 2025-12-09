@@ -4,10 +4,12 @@ import { BaseStorageNS, ITEM_STORAGE } from "../localStorage/BaseStorage";
 import { LocalRate } from "./LocalRate";
 import { LangStorage } from "../localStorage/LangStorage";
 import { OrderData, WithdrawStorage } from "../../Cornucopia_game/view/withdraw/WithdrawStorage";
+import { ConfigConst } from "../../Cornucopia_game/manager/ConfigConstManager";
 
 export namespace EventTracking {
     /**上报事件 */
     export function sendEvent(data: Object) {
+        data["ab_test"] = ConfigConst.getAbTest();
         const str = JSON.stringify(data);
         // console.log("上报",str);
         if (sys.platform === sys.Platform.ANDROID) {

@@ -29,8 +29,8 @@ android {
         applicationId APPLICATION_ID
         minSdkVersion PROP_MIN_SDK_VERSION
         targetSdkVersion PROP_TARGET_SDK_VERSION
-        versionCode 7
-        versionName "1.0.6"
+        versionCode 8
+        versionName "1.0.7"
 
         externalNativeBuild {
             cmake {
@@ -162,6 +162,7 @@ dependencies {
     implementation 'com.applovin.mediation:bidmachine-adapter:3.2.1.0'
     implementation 'com.applovin.mediation:google-adapter:24.2.0.0'
     implementation 'com.applovin.mediation:facebook-adapter:6.20.0.0'
+    implementation 'com.applovin.mediation:google-ad-manager-adapter:+'
 
 //    implementation 'com.applovin:applovin-sdk:+'
     implementation 'com.google.code.gson:gson:2.12.1'

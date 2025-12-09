@@ -40,8 +40,8 @@
                  .SetKwaiAppId("804378")           //kwai appId
                  .SetKwaiVideoId(listOf("8043786001")) //kwai视频ID
                  .SetKwaiInterId(listOf("8043786002")) //kwai插屏ID
-                 .SetDebug(true)             //debug模式
-                 .SetIsPrintLog(true);        //打印日志
+                 .SetDebug(false)             //debug模式
+                 .SetIsPrintLog(false);        //打印日志
 
          //测试参数
 //         FSMcGkXTYIYCZQSDKConfigUtil.getInstance()
